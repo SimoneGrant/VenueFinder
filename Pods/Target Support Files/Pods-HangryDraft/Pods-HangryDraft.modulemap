@@ -1,6 +1,0 @@
-framework module Pods_HangryDraft {
-  umbrella header "Pods-HangryDraft-umbrella.h"
-
-  export *
-  module * { export * }
-}
