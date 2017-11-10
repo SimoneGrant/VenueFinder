@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */; };
+		1883AD2F1FB6413900224C15 /* RestaurantVGModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */; };
+		1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD301FB6414F00224C15 /* YelpModel.swift */; };
 		1887BAC91FB63F8200E34FD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1887BAC81FB63F8200E34FD0 /* AppDelegate.swift */; };
 		1887BACB1FB63F8200E34FD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1887BACA1FB63F8200E34FD0 /* ViewController.swift */; };
 		1887BACE1FB63F8200E34FD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1887BACC1FB63F8200E34FD0 /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFSModel.swift; sourceTree = "<group>"; };
+		1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVGModel.swift; sourceTree = "<group>"; };
+		1883AD301FB6414F00224C15 /* YelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpModel.swift; sourceTree = "<group>"; };
 		1887BAC51FB63F8200E34FD0 /* VenueFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VenueFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1887BAC81FB63F8200E34FD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1887BACA1FB63F8200E34FD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				1887BADA1FB63FC400E34FD0 /* APIRequestManager.swift */,
+				1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */,
+				1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */,
+				1883AD301FB6414F00224C15 /* YelpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,8 +157,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
+				1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */,
+				1883AD2F1FB6413900224C15 /* RestaurantVGModel.swift in Sources */,
 				1887BACB1FB63F8200E34FD0 /* ViewController.swift in Sources */,
 				1887BAC91FB63F8200E34FD0 /* AppDelegate.swift in Sources */,
+				1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
