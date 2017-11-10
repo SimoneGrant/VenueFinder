@@ -124,7 +124,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "vegCell", for: indexPath) as! VGListTableViewCell
             let venuesVG = restaurantsVG[indexPath.row]
-            //this is how you refactor using cell property observer
+            //refactor using cell property observer
 //            if let vegCell = cell as? VGListTableViewCell   {
 //                vegCell.entry = venuesVG
 //            }
