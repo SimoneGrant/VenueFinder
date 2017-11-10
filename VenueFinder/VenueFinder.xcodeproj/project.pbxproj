@@ -22,6 +22,11 @@
 		1887BAD01FB63F8200E34FD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1887BACF1FB63F8200E34FD0 /* Assets.xcassets */; };
 		1887BAD31FB63F8200E34FD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1887BAD11FB63F8200E34FD0 /* LaunchScreen.storyboard */; };
 		1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1887BADA1FB63FC400E34FD0 /* APIRequestManager.swift */; };
+		189A30261FB648020096C2A8 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30251FB648020096C2A8 /* ListTableViewController.swift */; };
+		189A30281FB648220096C2A8 /* VGListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30271FB648220096C2A8 /* VGListTableViewCell.swift */; };
+		189A302A1FB648510096C2A8 /* FSListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30291FB648510096C2A8 /* FSListTableViewCell.swift */; };
+		189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302B1FB6488C0096C2A8 /* MapViewController.swift */; };
+		189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		1887BAD21FB63F8200E34FD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1887BAD41FB63F8200E34FD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1887BADA1FB63FC400E34FD0 /* APIRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		189A30251FB648020096C2A8 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		189A30271FB648220096C2A8 /* VGListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGListTableViewCell.swift; sourceTree = "<group>"; };
+		189A30291FB648510096C2A8 /* FSListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSListTableViewCell.swift; sourceTree = "<group>"; };
+		189A302B1FB6488C0096C2A8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +116,11 @@
 			isa = PBXGroup;
 			children = (
 				1887BACA1FB63F8200E34FD0 /* ViewController.swift */,
+				189A30251FB648020096C2A8 /* ListTableViewController.swift */,
+				189A30271FB648220096C2A8 /* VGListTableViewCell.swift */,
+				189A30291FB648510096C2A8 /* FSListTableViewCell.swift */,
+				189A302B1FB6488C0096C2A8 /* MapViewController.swift */,
+				189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -183,16 +198,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189A30281FB648220096C2A8 /* VGListTableViewCell.swift in Sources */,
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
+				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
+				189A30261FB648020096C2A8 /* ListTableViewController.swift in Sources */,
 				1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */,
 				1883AD351FB6428100224C15 /* APIKeys.swift in Sources */,
 				1883AD391FB6435600224C15 /* Helpers.swift in Sources */,
+				189A302A1FB648510096C2A8 /* FSListTableViewCell.swift in Sources */,
 				1883AD2F1FB6413900224C15 /* RestaurantVGModel.swift in Sources */,
 				1887BACB1FB63F8200E34FD0 /* ViewController.swift in Sources */,
 				1887BAC91FB63F8200E34FD0 /* AppDelegate.swift in Sources */,
 				1883AD3B1FB6439400224C15 /* ImageViewExt.swift in Sources */,
+				189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */,
 				1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
