@@ -110,7 +110,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FSListTableViewCell
             let venue = restaurantsFS[indexPath.row]
             //custom tableviewcell
             let fsCell = cell

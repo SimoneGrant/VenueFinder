@@ -19,45 +19,51 @@ class FSListTableViewCell: UITableViewCell {
     @IBOutlet weak var restaurantTypeLabel: UILabel!
     @IBOutlet weak var ratingsView: UIImageView!
     
-    
-    var entry: Entries? {
+    var venue: Venue? {
         didSet {
             updateUI()
         }
     }
     
     func updateUI() {
-        restaurantNameLabel.text = entry?.name.uppercased()
-        addressLabel.text = entry?.address1
+        restaurantNameLabel.text = venue?.name.uppercased()
+        addressLabel.text = venue?.location.address
         //category
-        if let categories = entry?.categories {
-            for category in categories {
-                restaurantTypeLabel.text = category.uppercased()
-            }
+        venue?.categories.forEach { (category) in
+            restaurantTypeLabel.text = category.name.uppercased()
         }
-        //ratings
-        if let rating = entry?.weighted_rating {
-            if let newRating = Double(rating) {
-                ratingsView.ratingvgImage(newRating)
-            }
-        }
-        //image
-        //BUG - images are not correct
+        //images
         venueImage.layer.cornerRadius = 12
         venueImage.layer.masksToBounds = true
         venueImage.clipsToBounds = true
         setNeedsLayout()
-        venueImage.image = #imageLiteral(resourceName: "pexels-photo-70497")
-        if let images = entry?.images {
-            for img in images.flatMap({ $0 }) {
-                print(img)
-                venueImage.image(img.files[1].uri)
+        for group in (venue?.photos?.groups)! {
+            for item in group.items {
+                venueImage.image("\(item.prefix)100x100\(item.suffix)")
             }
         }
+        //ratings
+        ratingsView.ratingfsImage((venue?.rating)!)
+        //hours
+        if let open = venue?.hours?.isOpen {
+            isOpenView.isOpen(open)
+        }
+        
         //isOpen
-        isOpenView.image = nil
+        //        if let hours = venuesVG.hours {
+        //            for sched in hours {
+        //                let venueDay = sched.days
+        //                let venueHrs = sched.hours
+        
+        //                if let day = Date().dayOfWeek() {
+        //                    print(day)
+        //                    if venueDay.contains(day) {
+        //                        print(venueDay)
+        //                    }
+        //                }
+        //            }
+        //        }
+        
     }
     
 }
-
-
