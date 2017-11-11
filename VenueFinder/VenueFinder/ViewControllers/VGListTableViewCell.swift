@@ -26,6 +26,16 @@ class VGListTableViewCell: UITableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        restaurantNameLabel.preferredMaxLayoutWidth = restaurantNameLabel.frame.size.width
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        restaurantNameLabel.preferredMaxLayoutWidth = restaurantNameLabel.frame.size.width
+    }
+    
     func updateUI() {
         restaurantNameLabel.text = entry?.name.uppercased()
         addressLabel.text = entry?.address1

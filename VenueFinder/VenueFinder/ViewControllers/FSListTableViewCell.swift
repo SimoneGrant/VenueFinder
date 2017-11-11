@@ -25,6 +25,16 @@ class FSListTableViewCell: UITableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib() //super calls the parent function when you override
+        restaurantNameLabel.preferredMaxLayoutWidth = restaurantNameLabel.frame.size.width
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        restaurantNameLabel.preferredMaxLayoutWidth = restaurantNameLabel.frame.size.width
+    }
+    
     func updateUI() {
         restaurantNameLabel.text = venue?.name.uppercased()
         addressLabel.text = venue?.location.address

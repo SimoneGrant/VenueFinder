@@ -28,8 +28,8 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         getLocationUpdate()
         fourSqData()
         vegGuideData()
-        //        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 130.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 110.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
