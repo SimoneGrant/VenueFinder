@@ -83,6 +83,7 @@
 		1887BAC71FB63F8200E34FD0 /* VenueFinder */ = {
 			isa = PBXGroup;
 			children = (
+				189A302F1FB7954E0096C2A8 /* Helpers */,
 				1887BADC1FB63FD100E34FD0 /* Model */,
 				189A30241FB6462F0096C2A8 /* ViewControllers */,
 				1887BACC1FB63F8200E34FD0 /* Main.storyboard */,
@@ -101,11 +102,8 @@
 				1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */,
 				1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */,
 				1883AD301FB6414F00224C15 /* YelpModel.swift */,
-				1883AD341FB6428100224C15 /* APIKeys.swift */,
 				1883AD361FB642E500224C15 /* RestaurantAnnotation.swift */,
-				1883AD381FB6435600224C15 /* Helpers.swift */,
 				1883AD3A1FB6439400224C15 /* ImageViewExt.swift */,
-				1883AD3C1FB643C300224C15 /* CountryCodes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,6 +118,16 @@
 				189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		189A302F1FB7954E0096C2A8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1883AD3C1FB643C300224C15 /* CountryCodes.swift */,
+				1883AD381FB6435600224C15 /* Helpers.swift */,
+				1883AD341FB6428100224C15 /* APIKeys.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
