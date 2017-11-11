@@ -32,30 +32,4 @@ struct Network {
     }
 }
 
-//index view controllers
-enum Index: Int {
-    case firstTab = 0
-    case secondTab = 1
-}
 
-//return rating image
-enum Rating {
-    case oneStar, twoStars, threeStars, fourStars, fiveStars
-}
-
-extension Rating {
-    var rating: UIImage {
-        switch self {
-        case .oneStar:
-            return #imageLiteral(resourceName: "oneStar")
-        case .twoStars:
-            return #imageLiteral(resourceName: "twoStars")
-        case .threeStars:
-            return #imageLiteral(resourceName: "threeStars")
-        case .fourStars:
-            return #imageLiteral(resourceName: "fourStars")
-        case .fiveStars:
-            return #imageLiteral(resourceName: "fiveStars")
-        }
-    }
-}
