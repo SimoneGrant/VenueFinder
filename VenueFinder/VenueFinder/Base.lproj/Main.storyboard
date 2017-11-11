@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +17,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--List Table View Controller-->
+        <!--Near You-->
         <scene sceneID="GCe-DT-gGY">
             <objects>
                 <tableViewController id="g6k-tk-y47" customClass="ListTableViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -88,6 +89,7 @@
                                         <constraint firstItem="1e8-1K-Pke" firstAttribute="leading" secondItem="n5z-D4-8fm" secondAttribute="trailing" constant="10" id="DVU-0S-f5U"/>
                                         <constraint firstItem="hRh-6s-y8F" firstAttribute="top" secondItem="1e8-1K-Pke" secondAttribute="bottom" id="EI8-DR-CGa"/>
                                         <constraint firstAttribute="trailing" secondItem="bKq-j1-Fv2" secondAttribute="trailing" constant="18" id="Lzn-n4-nog"/>
+                                        <constraint firstItem="YhO-WO-Ec7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IK0-82-JP9" secondAttribute="leadingMargin" id="NN8-Ua-T3Z"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="n5z-D4-8fm" secondAttribute="bottom" constant="12" id="NNz-tu-m1C"/>
                                         <constraint firstItem="hUL-dt-g39" firstAttribute="top" secondItem="YhO-WO-Ec7" secondAttribute="bottom" constant="1" id="Pd7-hj-YIB"/>
                                         <constraint firstItem="YhO-WO-Ec7" firstAttribute="top" secondItem="bKq-j1-Fv2" secondAttribute="bottom" constant="1" id="Ppd-8Y-oKd"/>
@@ -110,6 +112,7 @@
                                     <outlet property="addressLabel" destination="hRh-6s-y8F" id="g6k-nA-aqr"/>
                                     <outlet property="isOpenView" destination="hUL-dt-g39" id="qbX-YY-z0g"/>
                                     <outlet property="mileageLabel" destination="bKq-j1-Fv2" id="lzv-xN-rwb"/>
+                                    <outlet property="priceRangeLabel" destination="YhO-WO-Ec7" id="7W5-Ov-LPK"/>
                                     <outlet property="ratingsView" destination="jMD-3y-nAV" id="0Un-pM-loW"/>
                                     <outlet property="restaurantNameLabel" destination="q7w-ia-JCT" id="ilj-TD-Z3N"/>
                                     <outlet property="restaurantTypeLabel" destination="1e8-1K-Pke" id="2tu-gT-lvi"/>
@@ -201,6 +204,7 @@
                                     <outlet property="addressLabel" destination="tiJ-TP-fa4" id="Z2c-c1-v0o"/>
                                     <outlet property="isOpenView" destination="XjD-SH-XAv" id="9j8-Yc-owQ"/>
                                     <outlet property="mileageLabel" destination="7aD-Dc-XdP" id="2tb-oO-KS5"/>
+                                    <outlet property="priceRangeLabel" destination="ffz-Rq-MBq" id="R36-Oc-7Ie"/>
                                     <outlet property="ratingsView" destination="6Um-Ic-iHz" id="gjJ-uE-Eol"/>
                                     <outlet property="restaurantNameLabel" destination="ynp-W4-7eL" id="D5R-Tm-xF4"/>
                                     <outlet property="restaurantTypeLabel" destination="gSR-m4-RK3" id="HbS-Wi-cVc"/>
@@ -213,7 +217,22 @@
                             <outlet property="delegate" destination="g6k-tk-y47" id="utQ-9j-Qul"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="7Lr-33-INx"/>
+                    <navigationItem key="navigationItem" title="Near You" id="7Lr-33-INx">
+                        <leftBarButtonItems>
+                            <barButtonItem id="Ndf-Yf-OpF">
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                            <barButtonItem image="filter" id="6lz-f7-yWf">
+                                <inset key="imageInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="map" id="5KS-jh-7mV">
+                            <inset key="imageInsets" minX="0.0" minY="2" maxX="0.0" maxY="6"/>
+                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6y-oJ-b0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -247,6 +266,35 @@
             </objects>
             <point key="canvasLocation" x="1160.8" y="125.4872563718141"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="1UW-UL-ZIh">
+            <objects>
+                <viewController id="dkx-y5-xIk" customClass="MapViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ngd-Y3-QIT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SR1-4K-5Lg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sNC-gy-i5y" firstAttribute="trailing" secondItem="SR1-4K-5Lg" secondAttribute="trailing" id="RxE-OF-pcp"/>
+                            <constraint firstItem="sNC-gy-i5y" firstAttribute="bottom" secondItem="SR1-4K-5Lg" secondAttribute="bottom" id="ZdX-je-riz"/>
+                            <constraint firstItem="SR1-4K-5Lg" firstAttribute="leading" secondItem="sNC-gy-i5y" secondAttribute="leading" id="hAF-pu-b97"/>
+                            <constraint firstItem="SR1-4K-5Lg" firstAttribute="top" secondItem="sNC-gy-i5y" secondAttribute="top" id="mp8-gG-8gh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sNC-gy-i5y"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="SR1-4K-5Lg" id="wNp-Zy-VNA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aWw-Nw-yjF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1912.8" y="125.4872563718141"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="h0e-tF-6o7">
             <objects>
@@ -264,11 +312,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ut-7V-Td6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-167" y="126"/>
+            <point key="canvasLocation" x="-297" y="126"/>
         </scene>
     </scenes>
     <resources>
         <image name="closed" width="50" height="50"/>
+        <image name="filter" width="36" height="33"/>
+        <image name="map" width="29" height="27"/>
         <image name="small_0" width="82" height="14"/>
     </resources>
 </document>

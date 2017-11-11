@@ -28,13 +28,25 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         getLocationUpdate()
         fourSqData()
         vegGuideData()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 110.0
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+    }
+    
+    func setupUI() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 110.0
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.title = "Brooklyn"
+        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
+        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
+    }
+    
+    @objc func openMapView() {
+        
     }
     
     //Setup

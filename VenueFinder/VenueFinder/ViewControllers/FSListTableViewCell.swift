@@ -11,6 +11,7 @@ import CoreLocation
 
 class FSListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var priceRangeLabel: UILabel!
     @IBOutlet weak var venueImage: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -38,6 +39,7 @@ class FSListTableViewCell: UITableViewCell {
     func updateUI() {
         restaurantNameLabel.text = venue?.name.uppercased()
         addressLabel.text = venue?.location.address
+        priceRangeLabel.text = venue?.price?.currency
         //category
         venue?.categories.forEach { (category) in
             restaurantTypeLabel.text = category.name.uppercased()

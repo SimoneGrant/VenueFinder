@@ -11,6 +11,7 @@ import CoreLocation
 
 class VGListTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var priceRangeLabel: UILabel!
     @IBOutlet weak var venueImage: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -39,6 +40,7 @@ class VGListTableViewCell: UITableViewCell {
     func updateUI() {
         restaurantNameLabel.text = entry?.name.uppercased()
         addressLabel.text = entry?.address1
+        priceRangeLabel.text = entry?.price_range
         //category
         if let categories = entry?.categories {
             for category in categories {
