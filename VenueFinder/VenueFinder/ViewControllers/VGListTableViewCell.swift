@@ -40,7 +40,7 @@ class VGListTableViewCell: UITableViewCell {
     func updateUI() {
         restaurantNameLabel.text = entry?.name.uppercased()
         addressLabel.text = entry?.address1
-        priceRangeLabel.text = entry?.price_range
+        priceRangeLabel.text = entry?.price_range.components(separatedBy: " ")[0]
         //category
         if let categories = entry?.categories {
             for category in categories {
