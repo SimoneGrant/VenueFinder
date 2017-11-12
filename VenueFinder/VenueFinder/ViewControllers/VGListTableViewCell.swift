@@ -38,7 +38,7 @@ class VGListTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        restaurantNameLabel.text = entry?.name.uppercased()
+        restaurantNameLabel.text = entry?.name //.uppercased()
         addressLabel.text = entry?.address1
         priceRangeLabel.text = entry?.price_range.components(separatedBy: " ")[0]
         //category

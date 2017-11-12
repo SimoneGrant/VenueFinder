@@ -37,7 +37,7 @@ class FSListTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        restaurantNameLabel.text = venue?.name.uppercased()
+        restaurantNameLabel.text = venue?.name //.uppercased()
         addressLabel.text = venue?.location.address
         priceRangeLabel.text = venue?.price?.currency
         //category

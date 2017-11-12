@@ -41,12 +41,11 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     func setupUI() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 130.0
-        navigationController?.navigationBar.prefersLargeTitles = true
-        filterData()
         //        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
         //        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
     }
     
+    //remove duplicate entries in the vegguide and foursquare results
     func filterData() {
         if !restaurantsFS.isEmpty && !restaurantsVG.isEmpty {
             for (index, info) in restaurantsFS.enumerated() {
@@ -115,6 +114,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             currentLocation = locationManager.location!
         }
+        //call fresh data after location update
         fourSqData()
         vegGuideData()
     }
@@ -123,6 +123,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         print("Error encountered")
     }
     
+    //calculate mileage for the UILabels
     func calculateMileage(location: CLLocation, destination: CLLocation) -> String {
         let mileage = location.distance(from: destination) / 1609.344
         return "\(String(format: "%.01f", mileage)) mi"

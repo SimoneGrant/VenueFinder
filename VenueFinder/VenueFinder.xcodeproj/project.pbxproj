@@ -27,6 +27,7 @@
 		189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302B1FB6488C0096C2A8 /* MapViewController.swift */; };
 		189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */; };
 		189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */; };
+		189A30331FB7FA440096C2A8 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		189A302B1FB6488C0096C2A8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkString.swift; sourceTree = "<group>"; };
+		189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				189A30291FB648510096C2A8 /* FSListTableViewCell.swift */,
 				189A302B1FB6488C0096C2A8 /* MapViewController.swift */,
 				189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */,
+				189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				1883AD3B1FB6439400224C15 /* ImageViewExt.swift in Sources */,
 				189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */,
 				1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */,
+				189A30331FB7FA440096C2A8 /* FiltersTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
