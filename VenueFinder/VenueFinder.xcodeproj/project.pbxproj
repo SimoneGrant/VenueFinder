@@ -26,6 +26,7 @@
 		189A302A1FB648510096C2A8 /* FSListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30291FB648510096C2A8 /* FSListTableViewCell.swift */; };
 		189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302B1FB6488C0096C2A8 /* MapViewController.swift */; };
 		189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */; };
+		189A30311FB7D0CB0096C2A8 /* CustomNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30301FB7D0CB0096C2A8 /* CustomNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		189A30291FB648510096C2A8 /* FSListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSListTableViewCell.swift; sourceTree = "<group>"; };
 		189A302B1FB6488C0096C2A8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		189A30301FB7D0CB0096C2A8 /* CustomNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				1887BADA1FB63FC400E34FD0 /* APIRequestManager.swift */,
+				189A30301FB7D0CB0096C2A8 /* CustomNetwork.swift */,
 				1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */,
 				1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */,
 				1883AD301FB6414F00224C15 /* YelpModel.swift */,
@@ -206,6 +209,7 @@
 				189A30281FB648220096C2A8 /* VGListTableViewCell.swift in Sources */,
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
+				189A30311FB7D0CB0096C2A8 /* CustomNetwork.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
 				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
 				189A30261FB648020096C2A8 /* ListTableViewController.swift in Sources */,

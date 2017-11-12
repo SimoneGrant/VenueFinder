@@ -59,7 +59,7 @@ class DetailTableViewController: UITableViewController {
     func getYelpID() {
         let country = getCountryCode((venue?.location.country)!)
         if let phoneNum = venue?.contact.phone {
-            let url = "\(Network.Yelp.phoneSearchURL)\(country)\(phoneNum)"
+            let url = NetworkString().yelpSearchBy(phone: phoneNum, country: country)
             APIRequestManager.sharedManager.fetchYelpDetails(endPoint: url, { (business) in
                 DispatchQueue.main.async {
                     for data in business.businesses {
@@ -72,7 +72,7 @@ class DetailTableViewController: UITableViewController {
     }
     
     func getBusinessData(_ venueID: String) {
-        let url = "\(Network.Yelp.businessURL)\(venueID)"
+        let url = NetworkString().searchBy(venueID: venueID)
         APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
             self.venueDetails.append(business)
             self.getReviewData(self.yelpID)
@@ -80,7 +80,7 @@ class DetailTableViewController: UITableViewController {
     }
     
     func getReviewData(_ venueID: String) {
-        let url = "\(Network.Yelp.businessURL)\(venueID)/reviews"
+        let url = NetworkString().yelpSearchReviewsByVenue(ID: venueID)
         APIRequestManager.sharedManager.fetchYelpReviews(endPoint: url) { (reviews) in
             self.reviews = reviews.reviews
             print(reviews)

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class ListTableViewController: UITableViewController, CLLocationManagerDelegate {
-    
+
     var restaurantsFS = [Venue]()
     var restaurantsVG = [Entries]()
     var restaurantsYelp = [Details]()
@@ -22,7 +22,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         locMan.distanceFilter = 50.0
         return locMan
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocationUpdate()
@@ -41,17 +41,13 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         tableView.estimatedRowHeight = 110.0
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.title = "Brooklyn"
-        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
-        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
-    }
-    
-    @objc func openMapView() {
-        
+//        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
+//        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
     }
     
     //Setup
     func fourSqData() {
-        let url = "\(Network.FourSquare.baseURL)/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&venuePhotos=1&client_id=\(Auth.init().clientID)&client_secret=\(Auth.init().clientSecret)&v=20181124&query=vegan"
+        let url = NetworkString().fourSquareURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchFSData(endPoint: url) { (restaurant) in
             for group in restaurant.response.groups {
                 for items in group.items {
@@ -65,7 +61,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
     
     func vegGuideData() {
-        let url = "\(Network.VegGuide.baseURL)by-lat-long/\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)/filter/category_id=1;veg_level=4;distance=2"
+        let url = NetworkString().vegGuideURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchVGData(endPoint: url) { (restaurant) in
             DispatchQueue.main.async {
                 self.restaurantsVG = restaurant.entries
@@ -75,13 +71,18 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
     
     func yelpData() {
-        let url = "\(Network.Yelp.restaurantSearch)&latitude=\(currentLocation.coordinate.latitude)&longitude=\(currentLocation.coordinate.longitude)"
+        let url = NetworkString().yelpLatLngSearchString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchYelpRestaurants(endPoint: url) { (details) in
             self.restaurantsYelp = details.businesses
             //self.tableView.reloadData()
         }
     }
     
+    @objc func openMapView() {
+        
+    }
+    
+    //Location Manager
     func getLocationUpdate() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -91,7 +92,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
     
-    //Location Manager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if CLLocationManager.locationServicesEnabled() {
             currentLocation = locationManager.location!
@@ -102,6 +102,11 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error encountered")
+    }
+    
+    func calculateMileage(location: CLLocation, destination: CLLocation) -> String {
+        let mileage = location.distance(from: destination) / 1609.344
+        return "\(String(format: "%.01f", mileage)) mi"
     }
     
     // MARK: - Table view data source
@@ -124,7 +129,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FSListTableViewCell
             let venue = restaurantsFS[indexPath.row]
-            //custom tableviewcell
             let fsCell = cell
             fsCell.venue = venue
             //mileage
@@ -135,10 +139,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "vegCell", for: indexPath) as! VGListTableViewCell
             let venuesVG = restaurantsVG[indexPath.row]
-            //refactor using cell property observer
-            //            if let vegCell = cell as? VGListTableViewCell   {
-            //                vegCell.entry = venuesVG
-            //            }
             let vegCell = cell
             vegCell.entry = venuesVG
             //distance
@@ -158,11 +158,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             }
             return cell
         }
-    }
-    
-    func calculateMileage(location: CLLocation, destination: CLLocation) -> String {
-        let mileage = location.distance(from: destination) / 1609.344
-        return "\(String(format: "%.01f", mileage)) mi"
     }
     
     // MARK: - Navigation
@@ -186,12 +181,5 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     
 }
 
-extension Date {
-    func dayOfWeek() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE"
-        return dateFormatter.string(from: self).capitalized
-        // or use capitalized(with: locale) if you want
-    }
-}
+
 

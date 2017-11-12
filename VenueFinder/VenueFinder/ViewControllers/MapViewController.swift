@@ -29,7 +29,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getData() {
-        let url = "\(Network.FourSquare.baseURL)/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&venuePhotos=1&client_id=\(Auth.init().clientID)&client_secret=\(Auth.init().clientSecret)&v=20181124&query=vegan"
+        let url = NetworkString().fourSquareURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchFSData(endPoint: url) { (restaurant) in
             for group in restaurant.response.groups {
                 for items in group.items {
