@@ -29,6 +29,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         fourSqData()
         vegGuideData()
         setupUI()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

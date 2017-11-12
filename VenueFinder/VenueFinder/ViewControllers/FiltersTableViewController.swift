@@ -16,8 +16,10 @@ class FiltersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchButton.customView?.layer.borderWidth = 2.0
-        searchButton.customView?.layer.cornerRadius = 3.0
+        let doneButton = UIButton(type: .custom)
+        doneButton.setImage(#imageLiteral(resourceName: "button_done"), for: .normal)
+        doneButton.sizeToFit()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
     }
     
     @IBAction func searchButtonSelected(_ sender: Any) {
@@ -25,6 +27,10 @@ class FiltersTableViewController: UITableViewController {
     
     @IBAction func cancelButtonSelected(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+    @objc func openMapView() {
+        ////
     }
     
 

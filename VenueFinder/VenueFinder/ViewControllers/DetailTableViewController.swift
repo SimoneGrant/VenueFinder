@@ -19,18 +19,18 @@ class DetailTableViewController: UITableViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var ratingsView: UIImageView!
-    @IBOutlet weak var ratingsLabel: UILabel!
-    @IBOutlet weak var isOpenView: UIImageView!
-    @IBOutlet weak var priceRangeLabel: UILabel!
+//    @IBOutlet weak var ratingsView: UIImageView!
+//    @IBOutlet weak var ratingsLabel: UILabel!
+//    @IBOutlet weak var isOpenView: UIImageView!
+//    @IBOutlet weak var priceRangeLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var hoursView: UITextView!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var phoneNumLabel: UILabel!
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var descriptionView: UITextView!
-    @IBOutlet weak var websiteView: UITextView!
+//    @IBOutlet weak var addressLabel: UILabel!
+//    @IBOutlet weak var hoursView: UITextView!
+//    @IBOutlet weak var distanceLabel: UILabel!
+//    @IBOutlet weak var phoneNumLabel: UILabel!
+//    @IBOutlet weak var mapView: MKMapView!
+//    @IBOutlet weak var descriptionView: UITextView!
+//    @IBOutlet weak var websiteView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +40,23 @@ class DetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
+        //get rid of back button test on navigation
+        if let viewControllers = self.navigationController?.viewControllers {
+            let previousVC: UIViewController? = viewControllers.count >= 2 ? viewControllers[viewControllers.count - 2] : nil; // get previous view
+            previousVC?.title = "" // or previousVC?.title = "Back"
+        }
     }
     
     func setupUI() {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         if venue != nil {
             setupFSLabels()
             getYelpID()
@@ -100,28 +109,29 @@ class DetailTableViewController: UITableViewController {
     func setupFSLabels() {
         for item in (venue?.photos?.groups)! {
             for photo in item.items {
-                imageView.image(photo.prefix+"300x300"+photo.suffix)
+                imageView.image("\(photo.prefix)300x300\(photo.suffix)")
+//                print("\(photo.prefix)300x300\(photo.suffix)")
             }
         }
-        nameLabel.text = venue?.name.uppercased()
-        if let rating = venue?.rating {
-            ratingsLabel.text = "\(rating)"
-            ratingsView.ratingfsImage(rating)
-        }
-        if let open = venue?.hours?.isOpen {
-            isOpenView.isOpen(open)
-        }
-        if let priceRange = venue?.price?.currency {
-            priceRangeLabel.text = priceRange
-        }
+        nameLabel.text = venue?.name
         venue?.categories.forEach { (category) in
             categoryLabel.text = category.name.uppercased()
         }
-        guard let street = venue?.location.address, let city = venue?.location.city,
-            let state = venue?.location.state, let zip = venue?.location.postalCode else { return }
-        addressLabel.text = "\(street), \(city), \(state), \(zip)"
-        phoneNumLabel.text = venue?.contact.formattedPhone
-        websiteView.text = venue?.url?.lowercased()
+//        if let rating = venue?.rating {
+//            ratingsLabel.text = "\(rating)"
+//            ratingsView.ratingfsImage(rating)
+//        }
+//        if let open = venue?.hours?.isOpen {
+//            isOpenView.isOpen(open)
+//        }
+//        if let priceRange = venue?.price?.currency {
+//            priceRangeLabel.text = priceRange
+//        }
+//        guard let street = venue?.location.address, let city = venue?.location.city,
+//            let state = venue?.location.state, let zip = venue?.location.postalCode else { return }
+//        addressLabel.text = "\(street), \(city), \(state), \(zip)"
+//        phoneNumLabel.text = venue?.contact.formattedPhone
+//        websiteView.text = venue?.url?.lowercased()
     }
     
     func setupVGLabels() {
@@ -130,44 +140,44 @@ class DetailTableViewController: UITableViewController {
                 imageView.image(img.files[3].uri)
             }
         }
-        nameLabel.text = vgVenue?.name.uppercased()
+        nameLabel.text = vgVenue?.name
         for category in (vgVenue?.categories)! {
             categoryLabel.text = category.uppercased()
         }
-        addressLabel.text = vgVenue?.address1
-        if let address = vgVenue?.address1, let city = vgVenue?.city, let region = vgVenue?.region, let zip = vgVenue?.postal_code {
-            addressLabel.text = "\(address), \(city), \(region), \(zip)"
-        }
-        phoneNumLabel.text = vgVenue?.phone ?? "N/A"
-        if let rating = vgVenue?.weighted_rating {
-            let num = Double(rating)!
-            ratingsLabel.text = "\(num * 2)"
-            ratingsView.ratingvgImage(num)
-        }
-        isOpenView.image = nil
-        if let priceRange = vgVenue?.price_range {
-            priceRangeLabel.text = priceRange
-        }
-        descriptionView.text = vgVenue?.long_description?.wikitext
-        if let hours = vgVenue?.hours {
-            var hoursDict = [String:[String]]()
-            for sched in hours {
-                let venueDay = sched.days
-                let venueHrs = sched.hours
-                for hr in venueHrs {
-                    hoursDict[venueDay] = [hr]
-                }
-                
-                var hour = ""
-                for (day,hours) in hoursDict {
-                    for hr in hours {
-                        hour += day + "\n" + hr.uppercased() + "\n"
-                        hoursView.text = "HOURS - \n\(hour)"
-                    }
-                }
-            }
-        }
-        websiteView.text = vgVenue?.website?.lowercased()
+//        addressLabel.text = vgVenue?.address1
+//        if let address = vgVenue?.address1, let city = vgVenue?.city, let region = vgVenue?.region, let zip = vgVenue?.postal_code {
+//            addressLabel.text = "\(address), \(city), \(region), \(zip)"
+//        }
+//        phoneNumLabel.text = vgVenue?.phone ?? "N/A"
+//        if let rating = vgVenue?.weighted_rating {
+//            let num = Double(rating)!
+//            ratingsLabel.text = "\(num * 2)"
+//            ratingsView.ratingvgImage(num)
+//        }
+//        isOpenView.image = nil
+//        if let priceRange = vgVenue?.price_range {
+//            priceRangeLabel.text = priceRange
+//        }
+//        descriptionView.text = vgVenue?.long_description?.wikitext
+//        if let hours = vgVenue?.hours {
+//            var hoursDict = [String:[String]]()
+//            for sched in hours {
+//                let venueDay = sched.days
+//                let venueHrs = sched.hours
+//                for hr in venueHrs {
+//                    hoursDict[venueDay] = [hr]
+//                }
+//
+//                var hour = ""
+//                for (day,hours) in hoursDict {
+//                    for hr in hours {
+//                        hour += day + "\n" + hr.uppercased() + "\n"
+//                        hoursView.text = "HOURS - \n\(hour)"
+//                    }
+//                }
+//            }
+//        }
+//        websiteView.text = vgVenue?.website?.lowercased()
     }
 }
 
