@@ -82,12 +82,12 @@
                                         </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="hRh-6s-y8F" firstAttribute="leading" secondItem="1e8-1K-Pke" secondAttribute="leading" id="1QA-V4-SoL"/>
                                         <constraint firstItem="q7w-ia-JCT" firstAttribute="top" secondItem="IK0-82-JP9" secondAttribute="topMargin" constant="5" id="2Rb-fU-Tbo"/>
                                         <constraint firstItem="bKq-j1-Fv2" firstAttribute="leading" secondItem="q7w-ia-JCT" secondAttribute="trailing" constant="29" id="3pR-8C-1TI"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hRh-6s-y8F" secondAttribute="trailing" constant="20" symbolic="YES" id="42P-jd-VcZ"/>
-                                        <constraint firstItem="hRh-6s-y8F" firstAttribute="leading" secondItem="n5z-D4-8fm" secondAttribute="trailing" constant="10" id="4r2-E0-f8A"/>
-                                        <constraint firstItem="1e8-1K-Pke" firstAttribute="leading" secondItem="n5z-D4-8fm" secondAttribute="trailing" constant="10" id="DVU-0S-f5U"/>
                                         <constraint firstItem="hRh-6s-y8F" firstAttribute="top" secondItem="1e8-1K-Pke" secondAttribute="bottom" id="EI8-DR-CGa"/>
+                                        <constraint firstItem="bKq-j1-Fv2" firstAttribute="top" secondItem="IK0-82-JP9" secondAttribute="top" constant="19" id="F6h-JK-w8Y"/>
                                         <constraint firstAttribute="trailing" secondItem="bKq-j1-Fv2" secondAttribute="trailing" constant="18" id="Lzn-n4-nog"/>
                                         <constraint firstItem="YhO-WO-Ec7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IK0-82-JP9" secondAttribute="leadingMargin" id="NN8-Ua-T3Z"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="n5z-D4-8fm" secondAttribute="bottom" constant="12" id="NNz-tu-m1C"/>
@@ -98,14 +98,13 @@
                                         <constraint firstItem="YhO-WO-Ec7" firstAttribute="trailing" secondItem="bKq-j1-Fv2" secondAttribute="trailing" id="Tid-7i-2PK"/>
                                         <constraint firstItem="jMD-3y-nAV" firstAttribute="top" secondItem="hRh-6s-y8F" secondAttribute="bottom" constant="1" id="Tql-1r-rLa"/>
                                         <constraint firstItem="1e8-1K-Pke" firstAttribute="top" secondItem="q7w-ia-JCT" secondAttribute="bottom" id="VR5-Ma-yF7"/>
+                                        <constraint firstItem="1e8-1K-Pke" firstAttribute="leading" secondItem="q7w-ia-JCT" secondAttribute="leading" id="Xcw-KD-Vvo"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1e8-1K-Pke" secondAttribute="trailing" constant="20" symbolic="YES" id="ZI0-TC-Av9"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="hUL-dt-g39" secondAttribute="trailing" constant="10" id="dCF-P7-S50"/>
                                         <constraint firstItem="n5z-D4-8fm" firstAttribute="top" secondItem="IK0-82-JP9" secondAttribute="topMargin" constant="5" id="dWi-yW-Luq"/>
+                                        <constraint firstAttribute="trailing" secondItem="jMD-3y-nAV" secondAttribute="trailing" constant="200" id="j2i-D2-BXW"/>
+                                        <constraint firstItem="jMD-3y-nAV" firstAttribute="leading" secondItem="hRh-6s-y8F" secondAttribute="leading" id="lFn-af-ACV"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="jMD-3y-nAV" secondAttribute="bottom" constant="10" id="njF-cH-sZm"/>
                                         <constraint firstItem="hUL-dt-g39" firstAttribute="trailing" secondItem="YhO-WO-Ec7" secondAttribute="trailing" id="oPs-bH-ifY"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="YhO-WO-Ec7" secondAttribute="trailing" constant="10" id="okL-tu-yau"/>
-                                        <constraint firstItem="bKq-j1-Fv2" firstAttribute="top" secondItem="q7w-ia-JCT" secondAttribute="bottom" constant="-20" id="pYT-St-Qas"/>
-                                        <constraint firstItem="jMD-3y-nAV" firstAttribute="leading" secondItem="n5z-D4-8fm" secondAttribute="trailing" constant="10" id="ppr-zH-seX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

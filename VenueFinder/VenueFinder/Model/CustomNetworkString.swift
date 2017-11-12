@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CustomNetwork {
+protocol CustomNetworkString {
     func fourSquareURLString(latitude: Double, longitude: Double) -> String
     func vegGuideURLString(latitude: Double, longitude: Double) -> String
     func yelpLatLngSearchString(latitude: Double, longitude: Double) -> String
@@ -18,7 +18,7 @@ protocol CustomNetwork {
 }
 
 //return url's for API request
-extension CustomNetwork {
+extension CustomNetworkString {
     
     func fourSquareURLString(latitude: Double, longitude: Double) -> String {
         return "\(Network.FS.baseURL)\(Network.FS.Queries.coords)\(latitude),\(longitude)\(Network.FS.Queries.photoBool)\(Network.FS.Queries.id)\(Auth.init().clientID)\(Network.FS.Queries.secret)\(Auth.init().clientSecret)\(Network.FS.Queries.expiration)\(Network.FS.Queries.query)"
@@ -45,5 +45,5 @@ extension CustomNetwork {
     }
 }
 
-class NetworkString: CustomNetwork {}
+class NetworkString: CustomNetworkString {}
 

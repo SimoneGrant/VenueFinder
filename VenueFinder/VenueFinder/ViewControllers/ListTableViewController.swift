@@ -36,16 +36,33 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         UIApplication.shared.statusBarStyle = .default
     }
     
+    // MARK: - Setup UI & Networking
+    
     func setupUI() {
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 110.0
+        tableView.estimatedRowHeight = 130.0
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.title = "Brooklyn"
-//        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
-//        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
+        filterData()
+        //        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
+        //        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
     }
     
-    //Setup
+    func filterData() {
+        if !restaurantsFS.isEmpty && !restaurantsVG.isEmpty {
+            for (index, info) in restaurantsFS.enumerated() {
+                for (num, veg) in restaurantsVG.enumerated() {
+                    if info.location.address.components(separatedBy: " ")[0] == veg.address1.components(separatedBy: " ")[0] {
+                     if info.location.address.components(separatedBy: " ")[1] == veg.address1.components(separatedBy: " ")[1] {
+                        print("Foursqare: \(info.name), \(index)", "VegGuide: \(veg.name), \(num)")
+                            restaurantsVG.remove(at: num)
+                            tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func fourSqData() {
         let url = NetworkString().fourSquareURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchFSData(endPoint: url) { (restaurant) in
@@ -66,6 +83,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             DispatchQueue.main.async {
                 self.restaurantsVG = restaurant.entries
                 self.tableView.reloadData()
+                self.filterData()
             }
         }
     }
@@ -82,7 +100,8 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         
     }
     
-    //Location Manager
+    // MARK: - Location Manager
+    
     func getLocationUpdate() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
