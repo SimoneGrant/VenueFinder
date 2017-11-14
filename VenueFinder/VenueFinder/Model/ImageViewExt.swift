@@ -57,6 +57,25 @@ extension UIImageView {
         }
     }
     
+    public func ratingyelpImage(_ rating: Int) {
+        switch rating {
+        case 0:
+            self.image = Rating.oneStar.rating
+        case 1:
+            self.image = Rating.oneStar.rating
+        case 2:
+            self.image = Rating.twoStars.rating
+        case 3:
+            self.image = Rating.threeStars.rating
+        case 4:
+            self.image = Rating.fourStars.rating
+        case 5:
+            self.image = Rating.fiveStars.rating
+        default:
+            self.image = nil
+        }
+    }
+    
     //check if open
     public func isOpen(_ open: Bool) {
         if !open {
@@ -65,7 +84,17 @@ extension UIImageView {
             self.image = nil
         }
     }
+    //detail if open
+    public func detailIsOpen(_ open: Bool) {
+        if !open {
+            self.image = #imageLiteral(resourceName: "closed")
+        } else {
+            self.image = #imageLiteral(resourceName: "time")
+        }
+    }
 }
+
+
 
 
 //index view controllers
@@ -76,12 +105,14 @@ enum Index: Int {
 
 //return rating image
 enum Rating {
-    case oneStar, twoStars, threeStars, fourStars, fiveStars
+    case noStar, oneStar, twoStars, threeStars, fourStars, fiveStars
 }
 
 extension Rating {
     var rating: UIImage {
         switch self {
+        case .noStar:
+            return #imageLiteral(resourceName: "noStar")
         case .oneStar:
             return #imageLiteral(resourceName: "oneStar")
         case .twoStars:

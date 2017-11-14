@@ -27,29 +27,49 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var isOpenView: UIImageView!
     @IBOutlet weak var priceRangeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-//    @IBOutlet weak var hoursView: UITextView!
+    @IBOutlet weak var hoursView: UILabel!
 //    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var descriptionView: UITextView!
 //    @IBOutlet weak var websiteView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var reviewOne: UILabel!
+    @IBOutlet weak var reviewTwo: UILabel!
+    @IBOutlet weak var reviewThree: UILabel!
+    @IBOutlet weak var reviewDateOne: UILabel!
+    @IBOutlet weak var reviewDateTwo: UILabel!
+    @IBOutlet weak var reviewDateThree: UILabel!
+    @IBOutlet weak var reviewImageOne: UIImageView!
+    @IBOutlet weak var reviewImageTwo: UIImageView!
+    @IBOutlet weak var reviewImageThree: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
-        //get rid of back button test on navigation
-        if let viewControllers = self.navigationController?.viewControllers {
-            let previousVC: UIViewController? = viewControllers.count >= 2 ? viewControllers[viewControllers.count - 2] : nil; // get previous view
-            previousVC?.title = "" // or previousVC?.title = "Back"
-        }
+
     }
     
+    //change navigation transparency
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.navigationController!.navigationBar.alpha = 0.7 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = UIColor.white
+            navigationController?.navigationBar.tintColor = UIColor.black
+        if tableView.contentOffset.y <= 80 {
+            navigationController?.navigationBar.alpha = 1
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.tintColor = UIColor.white
+        }
+    }
+   
     func setupUI() {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
@@ -59,9 +79,6 @@ class DetailTableViewController: UITableViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
         
         if venue != nil {
             setupFSLabels()
@@ -98,7 +115,6 @@ class DetailTableViewController: UITableViewController {
     
     func getBusinessData(_ venueID: String) {
         let url = NetworkString().searchBy(venueID: venueID)
-        print(venueID)
         APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
                 self.venueDetails = [business]
                 //call here while venue details is accessible
@@ -112,6 +128,8 @@ class DetailTableViewController: UITableViewController {
         let url = NetworkString().yelpSearchReviewsByVenue(ID: venueID)
         APIRequestManager.sharedManager.fetchYelpReviews(endPoint: url) { (reviews) in
             self.reviews = reviews.reviews
+//            print(reviews)
+            self.printYelpReviews()
         }
     }
     
@@ -136,7 +154,7 @@ class DetailTableViewController: UITableViewController {
             ratingsView.ratingfsImage(rating)
         }
         if let open = venue?.hours?.isOpen {
-            isOpenView.isOpen(open)
+            isOpenView.detailIsOpen(open)
         }
         if let priceRange = venue?.price?.currency {
             priceRangeLabel.text = priceRange
@@ -163,7 +181,7 @@ class DetailTableViewController: UITableViewController {
                 }
             }
         }
-        print("tagArr is", tagArr)
+//        print("tagArr is", tagArr)
         if tagArr.count == 1 {
             tagString = tagArr[0]
         }
@@ -179,7 +197,7 @@ class DetailTableViewController: UITableViewController {
                 }
             }
         }
-        print("tagString", tagString)
+//        print("tagString", tagString)
         if tagString == "" {
             if let name = venue?.name {
             descriptionTextView.text = "\(name) specializes as a \(venueCategory)."
@@ -187,6 +205,26 @@ class DetailTableViewController: UITableViewController {
         }
         if let name = venue?.name {
            descriptionTextView.text = "\(name) is a \(venueCategory.lowercased()). They specialize in \(tagString.lowercased())."
+        }
+    }
+    
+    func printYelpReviews() {
+        //labels
+        for (index, review) in reviews.enumerated() {
+            print(review)
+            if index == 0 {
+                reviewOne.text = review.text
+                reviewDateOne.text = review.time_created.components(separatedBy: " ")[0]
+                reviewImageOne.ratingyelpImage(review.rating)
+            } else if index == 1 {
+                reviewTwo.text = review.text
+                reviewDateTwo.text = review.time_created.components(separatedBy: " ")[0]
+                reviewImageTwo.ratingyelpImage(review.rating)
+            } else if index == 2 {
+                reviewThree.text = review.text
+                reviewDateThree.text = review.time_created.components(separatedBy: " ")[0]
+                reviewImageThree.ratingyelpImage(review.rating)
+            }
         }
     }
     
@@ -207,7 +245,7 @@ class DetailTableViewController: UITableViewController {
             let num = Double(rating)!
             ratingsView.ratingvgImage(num)
         }
-        isOpenView.image = nil
+        isOpenView.image = #imageLiteral(resourceName: "time")
         if let priceRange = vgVenue?.price_range {
             priceRangeLabel.text = priceRange.components(separatedBy: " ")[0]
         }

@@ -33,14 +33,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "H A N G R Y"
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "H A N G R Y"
-    }
-    
+
     // MARK: - Setup UI & Networking
     
     func setupUI() {
@@ -57,7 +50,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                 for (num, veg) in restaurantsVG.enumerated() {
                     if info.location.address.components(separatedBy: " ")[0] == veg.address1.components(separatedBy: " ")[0] {
                      if info.location.address.components(separatedBy: " ")[1] == veg.address1.components(separatedBy: " ")[1] {
-                        print("Foursqare: \(info.name), \(index)", "VegGuide: \(veg.name), \(num)")
+//                        print("Foursqare: \(info.name), \(index)", "VegGuide: \(veg.name), \(num)")
                             restaurantsVG.remove(at: num)
                             tableView.reloadData()
                         }
@@ -188,6 +181,10 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //set the back button to empty text on new vc
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
         if let selectedCell = sender as? UITableViewCell {
             if segue.identifier == "fsDetail" {
                 let details = segue.destination as! DetailTableViewController
@@ -202,8 +199,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             }
         }
     }
-    
-    
 }
 
 
