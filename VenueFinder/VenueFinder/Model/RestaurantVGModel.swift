@@ -19,6 +19,7 @@ struct Entries: Decodable {
     let long_description: LongDescription?
     let reviews_uri: String
     let city: String
+    let country: String
     let postal_code: String?
     let neighborhood: String?
     let price_range: String
