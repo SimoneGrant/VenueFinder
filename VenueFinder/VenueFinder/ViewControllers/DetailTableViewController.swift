@@ -81,7 +81,7 @@ class DetailTableViewController: UITableViewController {
     
     //change navigation transparency
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.navigationController!.navigationBar.alpha = 0.7 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+        self.navigationController!.navigationBar.alpha = 0.4 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor.black
@@ -107,7 +107,11 @@ class DetailTableViewController: UITableViewController {
         } else {
             country = getCountryCode((vgVenue?.country)!)
             if let phoneNum = vgVenue?.phone {
+                //////////REFACTOR THIS /////////////
                 phoneNumber = phoneNum.replacingOccurrences(of: "-", with: "")
+                phoneNumber = phoneNumber.replacingOccurrences(of: "(", with: "")
+                phoneNumber = phoneNumber.replacingOccurrences(of: ")", with: "")
+                phoneNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
             }
         }
         let url = NetworkString().yelpSearchBy(phone: phoneNumber, country: country)
@@ -252,8 +256,15 @@ class DetailTableViewController: UITableViewController {
                     }
                 }
             }
+            if detail.hours.isEmpty {
+                getAlternativeHours()
+            }
         }
         printYelpReviews()
+    }
+    
+    func getAlternativeHours() {
+        print("alternative hours")
     }
     
     func setupVGLabels() {
