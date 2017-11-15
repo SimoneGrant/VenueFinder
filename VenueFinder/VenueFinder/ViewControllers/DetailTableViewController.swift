@@ -16,10 +16,7 @@ class DetailTableViewController: UITableViewController {
     var yelpID = String()
     var venueDetails = [VenueDetails]()
     var reviews = [Review]()
-    
     var venueCategory = ""
-    var tagArr = [String]()
-    var tagString = String()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -46,47 +43,58 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60
+        setupNavigationAndLabels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
-
     }
     
-    //change navigation transparency
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.navigationController!.navigationBar.alpha = 0.7 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = UIColor.white
-            navigationController?.navigationBar.tintColor = UIColor.black
-        if tableView.contentOffset.y <= 80 {
-            navigationController?.navigationBar.alpha = 1
-            navigationController?.navigationBar.isTranslucent = true
-            navigationController?.navigationBar.tintColor = UIColor.white
-        }
-    }
+    // MARK: - Setup, Navigation, and Scrolling
    
-    func setupUI() {
+    func setupNavigationAndLabels() {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
+//        self.navigationController?.view.backgroundColor = UIColor.clear
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blackHeart"), style: .plain, target: self, action: #selector(selectFavorite))
         
         if venue != nil {
             setupFSLabels()
         } else {
             setupVGLabels()
         }
+        
         getYelpID()
     }
+    
+    @objc func selectFavorite() {
+        print("selected")
+    }
+    
+    //change navigation transparency
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.navigationController!.navigationBar.alpha = 0.7 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor.black
+        UIApplication.shared.statusBarStyle = .default
+        if tableView.contentOffset.y <= 80 {
+            navigationController?.navigationBar.alpha = 1
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.tintColor = UIColor.white
+            UIApplication.shared.statusBarStyle = .lightContent
+        }
+    }
+    
+    // MARK: - Call API's
     
     func getYelpID() {
         var phoneNumber = ""
@@ -99,10 +107,11 @@ class DetailTableViewController: UITableViewController {
         } else {
             country = getCountryCode((vgVenue?.country)!)
             if let phoneNum = vgVenue?.phone {
-                phoneNumber = phoneNum
+                phoneNumber = phoneNum.replacingOccurrences(of: "-", with: "")
             }
         }
         let url = NetworkString().yelpSearchBy(phone: phoneNumber, country: country)
+        print(url)
         APIRequestManager.sharedManager.fetchYelpDetails(endPoint: url, { (business) in
             DispatchQueue.main.async {
                 for data in business.businesses {
@@ -118,30 +127,21 @@ class DetailTableViewController: UITableViewController {
         APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
                 self.venueDetails = [business]
                 //call here while venue details is accessible
-                self.setupYelpLabels()
+                self.setupYelpLabelsForFS()
+                self.setupYelpLabelsForVG()
                 self.getReviewData(self.yelpID)
         }
     }
     
     func getReviewData(_ venueID: String) {
-        print("4")
         let url = NetworkString().yelpSearchReviewsByVenue(ID: venueID)
         APIRequestManager.sharedManager.fetchYelpReviews(endPoint: url) { (reviews) in
             self.reviews = reviews.reviews
-//            print(reviews)
             self.printYelpReviews()
         }
     }
     
-    func getCountryCode(_ country: String) -> String {
-        var code = ""
-        let filteredResults = Countries.allCountries.filter( { $0.country == country } )
-        for x in filteredResults {
-            code = x.callCode
-        }
-        return code
-    }
-    
+    // MARK: Setup Views
     
     func setupFSLabels() {
         for item in (venue?.photos?.groups)! {
@@ -167,11 +167,13 @@ class DetailTableViewController: UITableViewController {
 //        websiteView.text = venue?.url?.lowercased()
     }
     
-    func setupYelpLabels() {
+    func setupYelpLabelsForFS() {
+        //restaurant description
+        var tagArr = [String]()
+        var tagString = String()
         venue?.categories.forEach { (category) in
             venueCategory = category.name.uppercased()
         }
-        
         for detail in venueDetails {
             for tag in detail.categories {
                 if tag.title == "Vegan" || tag.title == "Vegetarian" {
@@ -180,8 +182,19 @@ class DetailTableViewController: UITableViewController {
                     tagArr.append(tag.title)
                 }
             }
+            //time
+            for hours in detail.hours {
+                for openHours in hours.open {
+                    if let day = getDayOfWeek() {
+                    if openHours.day == day - 1 {
+                        let open = convertToReadableTime(openHours.start)
+                        let close = convertToReadableTime(openHours.end)
+                        hoursView.text = "\(getTime(open)) - \(getTime(close))"
+                        }
+                    }
+                }
+            }
         }
-//        print("tagArr is", tagArr)
         if tagArr.count == 1 {
             tagString = tagArr[0]
         }
@@ -197,7 +210,6 @@ class DetailTableViewController: UITableViewController {
                 }
             }
         }
-//        print("tagString", tagString)
         if tagString == "" {
             if let name = venue?.name {
             descriptionTextView.text = "\(name) specializes as a \(venueCategory)."
@@ -211,7 +223,6 @@ class DetailTableViewController: UITableViewController {
     func printYelpReviews() {
         //labels
         for (index, review) in reviews.enumerated() {
-            print(review)
             if index == 0 {
                 reviewOne.text = review.text
                 reviewDateOne.text = review.time_created.components(separatedBy: " ")[0]
@@ -228,7 +239,23 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
-
+    func setupYelpLabelsForVG() {
+        for detail in venueDetails {
+            for hours in detail.hours {
+                for openHours in hours.open {
+                    if let day = getDayOfWeek() {
+                        if openHours.day == day - 1 {
+                            let open = convertToReadableTime(openHours.start)
+                            let close = convertToReadableTime(openHours.end)
+                            hoursView.text = "\(getTime(open)) - \(getTime(close))"
+                        }
+                    }
+                }
+            }
+        }
+        printYelpReviews()
+    }
+    
     func setupVGLabels() {
         if let images = vgVenue?.images {
             for img in images {
@@ -251,6 +278,56 @@ class DetailTableViewController: UITableViewController {
         }
         descriptionTextView.text = vgVenue?.long_description?.wikitext
 //        websiteView.text = vgVenue?.website?.lowercased()
+    }
+    
+    // Helper Functions
+    
+    func getCountryCode(_ country: String) -> String {
+        var code = ""
+        let filteredResults = Countries.allCountries.filter( { $0.country == country } )
+        for x in filteredResults {
+            code = x.callCode
+        }
+        if country.characters.count == 2 {
+            let shortResult = Countries.allCountries.filter( {$0.shortAbbreviation == country })
+            for x in shortResult {
+                code = x.callCode
+            }
+        }
+        if country.characters.count == 3 {
+            let longerResult = Countries.allCountries.filter( {$0.longAbbreviation == country })
+            for x in longerResult {
+                code = x.callCode
+            }
+        }
+        return code
+    }
+    
+    func convertToReadableTime(_ time: String) -> String {
+        var convertedTime = Array(time)
+        convertedTime.insert(":", at: 2)
+        return String(convertedTime)
+    }
+    
+    func getTime(_ time: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let date = dateFormatter.date(from: time)
+        dateFormatter.dateFormat = "h:mm a"
+        var standardDate = ""
+        if let newDate = date {
+            standardDate = dateFormatter.string(from: newDate)
+            print("12 hour formatted Date:", standardDate)
+        }
+        return standardDate
+    }
+    
+    func getDayOfWeek() -> Int? {
+        let todayDate = Date()
+        let myCalendar = Calendar(identifier: .gregorian)
+        let myComponents = myCalendar.component(.weekday, from: todayDate)
+        let weekDay = myComponents
+        return weekDay
     }
 }
 

@@ -26,6 +26,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         getData()
         getLocationUpdate()
+//        setupNavBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavBar()
+    }
+    
+    func setupNavBar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func getData() {

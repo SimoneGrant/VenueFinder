@@ -225,7 +225,7 @@
                             </barButtonItem>
                             <barButtonItem image="filter" id="6lz-f7-yWf">
                                 <inset key="imageInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
-                                <color key="tintColor" red="0.80847805738449097" green="0.25800028443336487" blue="0.21587797999382019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="wQe-pj-afO" kind="presentation" id="64w-LQ-JbB"/>
                                 </connections>
@@ -234,7 +234,10 @@
                         <barButtonItem key="rightBarButtonItem" image="icons8-location-filled" id="5KS-jh-7mV">
                             <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="6"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
-                            <color key="tintColor" red="0.79283446073532104" green="0.21775424480438232" blue="0.17723655700683594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="dkx-y5-xIk" kind="show" id="4jK-vP-ett"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -381,7 +384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ex3-LM-PRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053.5999999999999" y="124.58770614692655"/>
+            <point key="canvasLocation" x="1209" y="-694"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="mbZ-Kl-fwN">
@@ -431,25 +434,14 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fa-Pj-BNM">
-                                            <rect key="frame" x="305" y="10" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="Ll1-gN-lp2"/>
-                                                <constraint firstAttribute="width" constant="60" id="Vja-DG-HnX"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                            <state key="normal" image="heart"/>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="JLq-o5-9bd" firstAttribute="top" secondItem="OpC-ax-NU6" secondAttribute="top" constant="192" id="3XJ-6w-8fz"/>
                                         <constraint firstItem="S9G-kl-qHx" firstAttribute="leading" secondItem="OpC-ax-NU6" secondAttribute="leading" constant="15" id="65G-VH-KgN"/>
                                         <constraint firstItem="JLq-o5-9bd" firstAttribute="leading" secondItem="OpC-ax-NU6" secondAttribute="leading" constant="15" id="7RT-2k-aAn"/>
-                                        <constraint firstItem="4Fa-Pj-BNM" firstAttribute="top" secondItem="OpC-ax-NU6" secondAttribute="top" constant="10" id="9Va-Be-whv"/>
                                         <constraint firstAttribute="trailing" secondItem="JLq-o5-9bd" secondAttribute="trailing" constant="260" id="dUh-Q5-XAv"/>
                                         <constraint firstItem="JLq-o5-9bd" firstAttribute="top" secondItem="S9G-kl-qHx" secondAttribute="bottom" id="gut-IK-Nln"/>
                                         <constraint firstAttribute="height" constant="220" id="p0X-Yb-El0"/>
-                                        <constraint firstAttribute="trailing" secondItem="4Fa-Pj-BNM" secondAttribute="trailing" constant="10" id="riI-YS-Yg6"/>
                                         <constraint firstAttribute="bottom" secondItem="JLq-o5-9bd" secondAttribute="bottom" constant="20" id="rnA-QG-TcH"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S9G-kl-qHx" secondAttribute="trailing" constant="10" id="s5z-ss-FRI"/>
                                     </constraints>
@@ -844,6 +836,10 @@
                             <outlet property="delegate" destination="Rr4-Yp-vsi" id="8r0-4r-ncc"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="rHh-v6-hYB"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addressLabel" destination="pCH-Ib-v9x" id="Wkc-KO-JJr"/>
                         <outlet property="descriptionTextView" destination="s4V-5t-AMa" id="byh-f5-RjG"/>
@@ -876,11 +872,11 @@
             <objects>
                 <viewController id="dkx-y5-xIk" customClass="MapViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ngd-Y3-QIT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SR1-4K-5Lg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -898,7 +894,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWw-Nw-yjF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2892" y="126"/>
+            <point key="canvasLocation" x="1370" y="125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h0e-tF-6o7">
@@ -936,7 +932,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3hv-U1-aRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1282" y="125"/>
+            <point key="canvasLocation" x="473" y="-694"/>
         </scene>
     </scenes>
     <resources>
@@ -945,7 +941,6 @@
         <image name="closed" width="50" height="50"/>
         <image name="filter" width="36" height="33"/>
         <image name="fourStars" width="82" height="14"/>
-        <image name="heart" width="24" height="24"/>
         <image name="icons8-location-filled" width="31" height="31"/>
         <image name="pexels-photo-70497" width="2295" height="1526"/>
         <image name="phone" width="36" height="31"/>

@@ -33,6 +33,12 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "H A N G R Y"
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+        navigationController?.navigationBar.isTranslucent = false
+    }
 
     // MARK: - Setup UI & Networking
     
