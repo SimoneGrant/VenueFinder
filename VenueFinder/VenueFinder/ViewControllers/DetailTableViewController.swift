@@ -102,12 +102,12 @@ class DetailTableViewController: UITableViewController {
         var phoneNumber = ""
         var country = ""
         if venue != nil {
-             country = getCountryCode((venue?.location.country)!)
+             country = GetCountry.getCountryCode((venue?.location.country)!)
             if let phoneNum = venue?.contact.phone {
                 phoneNumber = phoneNum
             }
         } else {
-            country = getCountryCode((vgVenue?.country)!)
+            country = GetCountry.getCountryCode((vgVenue?.country)!)
             if let phoneNum = vgVenue?.phone {
                 //////////REFACTOR THIS /////////////
                 phoneNumber = phoneNum.replacingOccurrences(of: "-", with: "")
@@ -324,35 +324,9 @@ class DetailTableViewController: UITableViewController {
                 for hr in hour.hours {
                     hoursView.text = hr
                 }
-        }
-        
-            
-            
-        }
-    }
-    
-    // Helper Functions
-    
-    func getCountryCode(_ country: String) -> String {
-        var code = ""
-        let filteredResults = Countries.allCountries.filter( { $0.country == country } )
-        for x in filteredResults {
-            code = x.callCode
-        }
-        if country.characters.count == 2 {
-            let shortResult = Countries.allCountries.filter( {$0.shortAbbreviation == country })
-            for x in shortResult {
-                code = x.callCode
             }
         }
-        if country.characters.count == 3 {
-            let longerResult = Countries.allCountries.filter( {$0.longAbbreviation == country })
-            for x in longerResult {
-                code = x.callCode
-            }
-        }
-        return code
     }
-
 }
+
 
