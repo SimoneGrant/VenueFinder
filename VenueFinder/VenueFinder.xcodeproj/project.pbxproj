@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		182DCC0D1FBD646F0098FBD5 /* TimeCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */; };
+		182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0E1FBD68620098FBD5 /* GetCountry.swift */; };
 		1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */; };
 		1883AD2F1FB6413900224C15 /* RestaurantVGModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */; };
 		1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD301FB6414F00224C15 /* YelpModel.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculation.swift; sourceTree = "<group>"; };
+		182DCC0E1FBD68620098FBD5 /* GetCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCountry.swift; sourceTree = "<group>"; };
 		1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFSModel.swift; sourceTree = "<group>"; };
 		1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVGModel.swift; sourceTree = "<group>"; };
 		1883AD301FB6414F00224C15 /* YelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpModel.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				1883AD381FB6435600224C15 /* Auth.swift */,
 				1883AD341FB6428100224C15 /* APIKeys.swift */,
 				182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */,
+				182DCC0E1FBD68620098FBD5 /* GetCountry.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
 				189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */,
+				182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
 				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
 				189A30261FB648020096C2A8 /* ListTableViewController.swift in Sources */,

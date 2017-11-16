@@ -57,11 +57,12 @@ class DetailTableViewController: UITableViewController {
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+        let nav = navigationController?.navigationBar
+        nav?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        nav?.shadowImage = UIImage()
+        nav?.isTranslucent = true
 //        self.navigationController?.view.backgroundColor = UIColor.clear
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        nav?.tintColor = UIColor.white
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blackHeart"), style: .plain, target: self, action: #selector(selectFavorite))
@@ -71,25 +72,26 @@ class DetailTableViewController: UITableViewController {
         } else {
             setupVGLabels()
         }
-        
         getYelpID()
     }
     
+    ///////IMPLEMENT NSUSERDEFAULTS///////
     @objc func selectFavorite() {
         print("selected")
     }
     
     //change navigation transparency
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.navigationController!.navigationBar.alpha = 0.4 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.tintColor = UIColor.black
+        let nav = navigationController?.navigationBar
+        nav?.alpha = 0.4 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+        nav?.isTranslucent = false
+        nav?.barTintColor = UIColor.white
+        nav?.tintColor = UIColor.black
         UIApplication.shared.statusBarStyle = .default
         if tableView.contentOffset.y <= 80 {
-            navigationController?.navigationBar.alpha = 1
-            navigationController?.navigationBar.isTranslucent = true
-            navigationController?.navigationBar.tintColor = UIColor.white
+            nav?.alpha = 1
+            nav?.isTranslucent = true
+            nav?.tintColor = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
     }
@@ -198,6 +200,7 @@ class DetailTableViewController: UITableViewController {
                 }
             }
         }
+        //appending descriptions to tag while still in venueDetails
         if tagArr.count == 1 {
             tagString = tagArr[0]
         }
