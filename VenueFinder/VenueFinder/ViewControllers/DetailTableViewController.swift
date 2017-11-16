@@ -13,9 +13,9 @@ class DetailTableViewController: UITableViewController {
     
     var venue: Venue?
     var vgVenue: Entries?
-    var yelpID = String()
-    var venueDetails = [VenueDetails]()
+    var venueDetails: VenueDetails?
     var reviews = [Review]()
+    var yelpID = String()
     var venueCategory = ""
     
     @IBOutlet weak var imageView: UIImageView!
@@ -61,7 +61,6 @@ class DetailTableViewController: UITableViewController {
         nav?.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         nav?.shadowImage = UIImage()
         nav?.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = UIColor.clear
         nav?.tintColor = UIColor.white
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
@@ -130,7 +129,7 @@ class DetailTableViewController: UITableViewController {
     func getBusinessData(_ venueID: String) {
         let url = NetworkString().searchBy(venueID: venueID)
         APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
-                self.venueDetails = [business]
+                self.venueDetails = business
                 //call here while venue details is accessible
                 self.setupYelpLabelsForFS()
                 self.setupYelpLabelsForVG()
@@ -173,38 +172,24 @@ class DetailTableViewController: UITableViewController {
     }
     
     func setupYelpLabelsForFS() {
-        //restaurant description
+        //restaurant descriptions
         var tagArr = [String]()
         var tagString = String()
         venue?.categories.forEach { (category) in
             venueCategory = category.name.uppercased()
         }
-        for detail in venueDetails {
-            for tag in detail.categories {
-                if tag.title == "Vegan" || tag.title == "Vegetarian" {
-                    tagArr.append("\(tag.title) cuisine")
-                } else {
-                    tagArr.append(tag.title)
-                }
-            }
-            //time
-            for hours in detail.hours {
-                for openHours in hours.open {
-                    if let day = Time().getDayOfWeek() {
-                    if openHours.day == day - 1 {
-                        let open = Time().convertToReadableTime(openHours.start)
-                        let close = Time().convertToReadableTime(openHours.end)
-                        hoursView.text = "\(Time().getTime(open)) - \(Time().getTime(close))"
-                        }
-                    }
-                }
+        for tag in (venueDetails?.categories)! {
+            if tag.title == "Vegan" || tag.title == "Vegetarian" {
+                tagArr.append("\(tag.title) cuisine")
+            } else {
+                tagArr.append(tag.title)
             }
         }
-        //appending descriptions to tag while still in venueDetails
+        //appending descriptions to tag
         if tagArr.count == 1 {
             tagString = tagArr[0]
         }
-        if tagArr.count >= 2 {
+        if tagArr.count == 2 {
             tagArr.insert("and ", at: tagArr.count - 1)
         }
         if tagArr.count >= 3 {
@@ -218,11 +203,25 @@ class DetailTableViewController: UITableViewController {
         }
         if tagString == "" {
             if let name = venue?.name {
-            descriptionTextView.text = "\(name) specializes as a \(venueCategory)."
+                descriptionTextView.text = "\(name) specializes as a \(venueCategory)."
             }
         }
         if let name = venue?.name {
-           descriptionTextView.text = "\(name) is a \(venueCategory.lowercased()). They specialize in \(tagString.lowercased())."
+            descriptionTextView.text = "\(name) is a \(venueCategory.lowercased()). They specialize in \(tagString.lowercased())."
+        }
+        
+        //get time
+        let time = Time()
+        for hours in (venueDetails?.hours)! {
+            for openHours in hours.open {
+                if let day = time.getDayOfWeek() {
+                    if openHours.day == day - 1 {
+                        let open = time.convertToReadableTime(openHours.start)
+                        let close = time.convertToReadableTime(openHours.end)
+                        hoursView.text = "\(time.getTime(open)) - \(time.getTime(close))"
+                    }
+                }
+            }
         }
     }
     
@@ -246,15 +245,14 @@ class DetailTableViewController: UITableViewController {
     }
     
     func setupYelpLabelsForVG() {
-        for detail in venueDetails {
-            for hours in detail.hours {
-                for openHours in hours.open {
-                    if let day = Time().getDayOfWeek() {
-                        if openHours.day == day - 1 {
-                            let open = Time().convertToReadableTime(openHours.start)
-                            let close = Time().convertToReadableTime(openHours.end)
-                            hoursView.text = "\(Time().getTime(open)) - \(Time().getTime(close))"
-                        }
+        let time = Time()
+        for hours in (venueDetails?.hours)! {
+            for openHours in hours.open {
+                if let day = time.getDayOfWeek() {
+                    if openHours.day == day - 1 {
+                        let open = time.convertToReadableTime(openHours.start)
+                        let close = time.convertToReadableTime(openHours.end)
+                        hoursView.text = "\(time.getTime(open)) - \(time.getTime(close))"
                     }
                 }
             }
@@ -316,11 +314,10 @@ class DetailTableViewController: UITableViewController {
             case "Thur - Fri":
                 range = Array(4...5)
             default:
-                print(restaurantDay)
+//                print(restaurantDay)
                 break
             }
             if range.contains(day!) {
-                print(range)
                 for hr in hour.hours {
                     hoursView.text = hr
                 }
