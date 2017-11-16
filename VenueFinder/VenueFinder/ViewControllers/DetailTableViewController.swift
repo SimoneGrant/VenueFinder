@@ -188,11 +188,11 @@ class DetailTableViewController: UITableViewController {
             //time
             for hours in detail.hours {
                 for openHours in hours.open {
-                    if let day = getDayOfWeek() {
+                    if let day = Time().getDayOfWeek() {
                     if openHours.day == day - 1 {
-                        let open = convertToReadableTime(openHours.start)
-                        let close = convertToReadableTime(openHours.end)
-                        hoursView.text = "\(getTime(open)) - \(getTime(close))"
+                        let open = Time().convertToReadableTime(openHours.start)
+                        let close = Time().convertToReadableTime(openHours.end)
+                        hoursView.text = "\(Time().getTime(open)) - \(Time().getTime(close))"
                         }
                     }
                 }
@@ -246,11 +246,11 @@ class DetailTableViewController: UITableViewController {
         for detail in venueDetails {
             for hours in detail.hours {
                 for openHours in hours.open {
-                    if let day = getDayOfWeek() {
+                    if let day = Time().getDayOfWeek() {
                         if openHours.day == day - 1 {
-                            let open = convertToReadableTime(openHours.start)
-                            let close = convertToReadableTime(openHours.end)
-                            hoursView.text = "\(getTime(open)) - \(getTime(close))"
+                            let open = Time().convertToReadableTime(openHours.start)
+                            let close = Time().convertToReadableTime(openHours.end)
+                            hoursView.text = "\(Time().getTime(open)) - \(Time().getTime(close))"
                         }
                     }
                 }
@@ -283,27 +283,33 @@ class DetailTableViewController: UITableViewController {
 //        websiteView.text = vgVenue?.website?.lowercased()
         
         //if yelp hours aren't available
+        var range = [0,1,2,3,4,5,6]
+        let day = Time().getDayOfWeek()
         for hour in (vgVenue?.hours)!  {
-            let day = getDayOfWeek()
-            print(hour)
             let restaurantDay = hour.days
-            var range = [0,1,2,3,4,5,6]
-            //apply correct days to range
+            //apply correct combination to range
             switch restaurantDay {
             case "Mon - Fri":
                 range = Array(1...5)
+                break
             case "Mon - Wed":
                 range = Array(1...3)
+                break
             case "Mon - Thu":
                 range = Array(1...4)
+                break
             case "Tue - Thu":
                 range = Array(2...4)
+                break
             case "Fri - Sat":
                 range = Array(5...6)
+                break
             case "Sat - Sun":
                 range = [6,0]
+                break
             case "Fri - Sun":
                 range = [5,6,0]
+                break
             case "Thur - Fri":
                 range = Array(4...5)
             default:
@@ -311,11 +317,12 @@ class DetailTableViewController: UITableViewController {
                 break
             }
             if range.contains(day!) {
+                print(range)
                 for hr in hour.hours {
                     hoursView.text = hr
                 }
-            }
-            
+        }
+        
             
             
         }
@@ -343,32 +350,6 @@ class DetailTableViewController: UITableViewController {
         }
         return code
     }
-    
-    func convertToReadableTime(_ time: String) -> String {
-        var convertedTime = Array(time)
-        convertedTime.insert(":", at: 2)
-        return String(convertedTime)
-    }
-    
-    func getTime(_ time: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let date = dateFormatter.date(from: time)
-        dateFormatter.dateFormat = "h:mm a"
-        var standardDate = ""
-        if let newDate = date {
-            standardDate = dateFormatter.string(from: newDate)
-            print("12 hour formatted Date:", standardDate)
-        }
-        return standardDate
-    }
-    
-    func getDayOfWeek() -> Int? {
-        let todayDate = Date()
-        let myCalendar = Calendar(identifier: .gregorian)
-        let myComponents = myCalendar.component(.weekday, from: todayDate)
-        let weekDay = myComponents
-        return weekDay
-    }
+
 }
 
