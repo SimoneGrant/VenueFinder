@@ -43,10 +43,12 @@ struct Network {
         static let restaurantSearch = "https://api.yelp.com/v3/businesses/search?term=vegan"
         static let phoneSearchURL = "https://api.yelp.com/v3/businesses/search/phone?phone="
         static let businessURL = "https://api.yelp.com/v3/businesses/"
+        static let restaurantNameSearch = "https://api.yelp.com/v3/businesses/search?"
         struct Filters {
             static let lat = "&latitude="
             static let lng = "&longitude="
             static let reviews = "/reviews"
+            static let term = "?term="
         }
     }
 }

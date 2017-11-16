@@ -15,6 +15,7 @@ protocol CustomNetworkString {
     func yelpSearchBy(phone: String, country: String) -> String
     func yelpSearchReviewsByVenue(ID: String) -> String
     func searchBy(venueID: String) -> String
+    func searchByVenue(name: String, latitude: Double, longitude: Double) -> String
 }
 
 //return url's for API request
@@ -42,6 +43,10 @@ extension CustomNetworkString {
     
     func searchBy(venueID: String) -> String {
         return "\(Network.Yelp.businessURL)\(venueID)"
+    }
+    
+    func searchByVenue(name: String, latitude: Double, longitude: Double) -> String {
+        return "\(Network.Yelp.restaurantNameSearch)\(Network.Yelp.Filters.term)\(name)\(Network.Yelp.Filters.lat)\(latitude)\(Network.Yelp.Filters.lng)\(longitude)"
     }
 }
 

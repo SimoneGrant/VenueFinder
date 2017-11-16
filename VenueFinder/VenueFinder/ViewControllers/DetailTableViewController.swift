@@ -115,7 +115,6 @@ class DetailTableViewController: UITableViewController {
             }
         }
         let url = NetworkString().yelpSearchBy(phone: phoneNumber, country: country)
-        print(url)
         APIRequestManager.sharedManager.fetchYelpDetails(endPoint: url, { (business) in
             DispatchQueue.main.async {
                 for data in business.businesses {
@@ -256,15 +255,8 @@ class DetailTableViewController: UITableViewController {
                     }
                 }
             }
-            if detail.hours.isEmpty {
-                getAlternativeHours()
-            }
         }
         printYelpReviews()
-    }
-    
-    func getAlternativeHours() {
-        print("alternative hours")
     }
     
     func setupVGLabels() {
@@ -289,6 +281,44 @@ class DetailTableViewController: UITableViewController {
         }
         descriptionTextView.text = vgVenue?.long_description?.wikitext
 //        websiteView.text = vgVenue?.website?.lowercased()
+        
+        //if yelp hours aren't available
+        for hour in (vgVenue?.hours)!  {
+            let day = getDayOfWeek()
+            print(hour)
+            let restaurantDay = hour.days
+            var range = [0,1,2,3,4,5,6]
+            //apply correct days to range
+            switch restaurantDay {
+            case "Mon - Fri":
+                range = Array(1...5)
+            case "Mon - Wed":
+                range = Array(1...3)
+            case "Mon - Thu":
+                range = Array(1...4)
+            case "Tue - Thu":
+                range = Array(2...4)
+            case "Fri - Sat":
+                range = Array(5...6)
+            case "Sat - Sun":
+                range = [6,0]
+            case "Fri - Sun":
+                range = [5,6,0]
+            case "Thur - Fri":
+                range = Array(4...5)
+            default:
+                print(restaurantDay)
+                break
+            }
+            if range.contains(day!) {
+                for hr in hour.hours {
+                    hoursView.text = hr
+                }
+            }
+            
+            
+            
+        }
     }
     
     // Helper Functions
