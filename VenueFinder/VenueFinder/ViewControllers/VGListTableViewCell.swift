@@ -68,6 +68,8 @@ class VGListTableViewCell: UITableViewCell {
         }
         //isOpen
         isOpenView.image = nil
+        
+        
     }
     
 }

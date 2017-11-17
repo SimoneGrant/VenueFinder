@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -483,8 +484,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="hours not specified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CD-76-zgg">
-                                                    <rect key="frame" x="46" y="23.5" width="128" height="20.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="46" y="23.5" width="130.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -539,8 +540,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Long Ass Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCH-Ib-v9x">
-                                                    <rect key="frame" x="46" y="10" width="120" height="20.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="46" y="10" width="122.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -572,17 +573,27 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(555) 555-5555" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guG-Jk-T98">
-                                                    <rect key="frame" x="46" y="10" width="100.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="46" y="10" width="101" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9p-1B-sfI">
+                                                    <rect key="frame" x="8" y="4" width="160" height="33"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                                    <connections>
+                                                        <action selector="selectedPhoneNum:" destination="Rr4-Yp-vsi" eventType="touchUpInside" id="5Bq-hQ-M6P"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="74I-JP-WDe" firstAttribute="centerY" secondItem="lHY-5r-S54" secondAttribute="centerY" id="0xF-1f-AZC"/>
                                                 <constraint firstItem="74I-JP-WDe" firstAttribute="leading" secondItem="lHY-5r-S54" secondAttribute="leadingMargin" constant="3" id="QWX-1d-otZ"/>
+                                                <constraint firstItem="m9p-1B-sfI" firstAttribute="centerY" secondItem="lHY-5r-S54" secondAttribute="centerY" id="STi-Y2-9JO"/>
                                                 <constraint firstItem="guG-Jk-T98" firstAttribute="centerY" secondItem="lHY-5r-S54" secondAttribute="centerY" id="azl-Hq-0JP"/>
+                                                <constraint firstItem="m9p-1B-sfI" firstAttribute="leading" secondItem="lHY-5r-S54" secondAttribute="leading" constant="8" id="nLH-m9-JGs"/>
                                                 <constraint firstItem="guG-Jk-T98" firstAttribute="leading" secondItem="74I-JP-WDe" secondAttribute="trailing" constant="15" id="nX2-RL-kuU"/>
+                                                <constraint firstItem="m9p-1B-sfI" firstAttribute="width" secondItem="guG-Jk-T98" secondAttribute="height" multiplier="28:5" constant="45.200000000000003" id="tNE-Wd-4YR"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="guG-Jk-T98" secondAttribute="trailing" constant="20" symbolic="YES" id="xtX-Eq-Bal"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -603,8 +614,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BoH-We-rn0">
-                                                    <rect key="frame" x="46" y="-1.5" width="87" height="33"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="46" y="-1.5" width="89" height="33"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <state key="normal" title="Visit Website">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -612,8 +623,16 @@
                                                         <action selector="visitWebsiteSelected:" destination="Rr4-Yp-vsi" eventType="touchUpInside" id="GBi-Vd-Dsb"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ1-is-wie">
+                                                    <rect key="frame" x="4" y="0.0" width="41" height="30"/>
+                                                    <connections>
+                                                        <action selector="selectedPhoneNum:" destination="Rr4-Yp-vsi" eventType="touchUpInside" id="DUO-iO-FUM"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="QJ1-is-wie" firstAttribute="centerY" secondItem="yrl-vW-JzM" secondAttribute="centerY" id="5PO-dj-WfN"/>
+                                                <constraint firstItem="BoH-We-rn0" firstAttribute="leading" secondItem="QJ1-is-wie" secondAttribute="trailing" constant="1" id="8UZ-Cl-Kf1"/>
                                                 <constraint firstItem="ay7-u5-mgJ" firstAttribute="leading" secondItem="yrl-vW-JzM" secondAttribute="leadingMargin" constant="3" id="8wK-5O-WSH"/>
                                                 <constraint firstItem="BoH-We-rn0" firstAttribute="leading" secondItem="ay7-u5-mgJ" secondAttribute="trailing" constant="15" id="9u5-aD-wqK"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BoH-We-rn0" secondAttribute="trailing" constant="20" symbolic="YES" id="DZr-5h-jGO"/>
@@ -700,8 +719,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Ass Description One" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci7-gN-ElG">
-                                                    <rect key="frame" x="56" y="59.5" width="175.5" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="56" y="59.5" width="178" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -743,8 +762,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Ass Description Two" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQF-9h-ZW9">
-                                                    <rect key="frame" x="56" y="60" width="173" height="20.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="56" y="60" width="176" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -800,8 +819,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Ass Description Three" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0F-dK-m4H">
-                                                    <rect key="frame" x="56" y="60" width="184.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <rect key="frame" x="56" y="60" width="188" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

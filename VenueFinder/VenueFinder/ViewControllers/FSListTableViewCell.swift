@@ -60,22 +60,6 @@ class FSListTableViewCell: UITableViewCell {
         if let open = venue?.hours?.isOpen {
             isOpenView.isOpen(open)
         }
-        
-        //isOpen
-        //        if let hours = venuesVG.hours {
-        //            for sched in hours {
-        //                let venueDay = sched.days
-        //                let venueHrs = sched.hours
-        
-        //                if let day = Date().dayOfWeek() {
-        //                    print(day)
-        //                    if venueDay.contains(day) {
-        //                        print(venueDay)
-        //                    }
-        //                }
-        //            }
-        //        }
-        
     }
     
 }

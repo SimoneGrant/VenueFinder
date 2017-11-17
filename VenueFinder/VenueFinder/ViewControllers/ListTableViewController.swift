@@ -13,7 +13,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
 
     var restaurantsFS = [Venue]()
     var restaurantsVG = [Entries]()
-    var restaurantsYelp = [Details]()
     var currentLocation = CLLocation(latitude: 40.7, longitude: -74)
     let geocoder = CLGeocoder()
     let locationManager: CLLocationManager = {
@@ -66,6 +65,12 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
     
+    @objc func openMapView() {
+        
+    }
+    
+    // MARK: - Call API's
+    
     func fourSqData() {
         let url = NetworkString().fourSquareURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchFSData(endPoint: url) { (restaurant) in
@@ -91,17 +96,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         }
     }
     
-    func yelpData() {
-        let url = NetworkString().yelpLatLngSearchString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        APIRequestManager.sharedManager.fetchYelpRestaurants(endPoint: url) { (details) in
-            self.restaurantsYelp = details.businesses
-            //self.tableView.reloadData()
-        }
-    }
-    
-    @objc func openMapView() {
-        
-    }
     
     // MARK: - Location Manager
     

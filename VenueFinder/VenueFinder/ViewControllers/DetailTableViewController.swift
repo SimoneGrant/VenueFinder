@@ -85,12 +85,12 @@ class DetailTableViewController: UITableViewController {
     //change navigation transparency
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let nav = navigationController?.navigationBar
-        nav?.alpha = 0.4 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+        nav?.alpha = 0.3 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
         nav?.isTranslucent = false
         nav?.barTintColor = UIColor.white
         nav?.tintColor = UIColor.black
         app.statusBarStyle = .default
-        if tableView.contentOffset.y <= 80 {
+        if tableView.contentOffset.y <= 40 {
             nav?.alpha = 1
             nav?.isTranslucent = true
             nav?.tintColor = UIColor.white
@@ -101,8 +101,8 @@ class DetailTableViewController: UITableViewController {
     // MARK: - Call API's
     
     func getYelpID() {
-        var phoneNumber = ""
-        var country = ""
+        var phoneNumber = String()
+        var country = String()
         if venue != nil {
              country = GetCountry.getCountryCode((venue?.location.country)!)
             if let phoneNum = venue?.contact.phone {
@@ -110,12 +110,9 @@ class DetailTableViewController: UITableViewController {
             }
         } else {
             country = GetCountry.getCountryCode((vgVenue?.country)!)
-            if let phoneNum = vgVenue?.phone {
-                //////////REFACTOR THIS /////////////
-                phoneNumber = phoneNum.replacingOccurrences(of: "-", with: "")
-                phoneNumber = phoneNumber.replacingOccurrences(of: "(", with: "")
-                phoneNumber = phoneNumber.replacingOccurrences(of: ")", with: "")
-                phoneNumber = phoneNumber.replacingOccurrences(of: " ", with: "")
+            //regex for non-digits
+            if let phoneNum = vgVenue?.phone?.replacingOccurrences(of: "[^\\d+]", with: "", options: .regularExpression, range: ((vgVenue?.phone)!).startIndex..<((vgVenue?.phone)!).endIndex) {
+                phoneNumber = phoneNum
             }
         }
         let url = NetworkString().yelpSearchBy(phone: phoneNumber, country: country)
@@ -148,9 +145,9 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Setup Views
+    // MARK: Setup Views and Functionality
     
-    //Visit URL
+    //Visit website
     @IBAction func visitWebsiteSelected(_ sender: UIButton) {
         if venue != nil {
             if let url = venue?.url {
@@ -165,7 +162,27 @@ class DetailTableViewController: UITableViewController {
     
     func goToURL(_ url: String) {
         if let destinationURL = URL(string: url) {
-            app.open(destinationURL as URL, options: [:], completionHandler: nil)
+            app.open(destinationURL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    //Make a call
+    @IBAction func selectedPhoneNum(_ sender: UIButton) {
+        if venue != nil {
+            if let number = venue?.contact.phone {
+                dialPhoneNum(number)
+            }
+        } else {
+            if let number = vgVenue?.phone?.replacingOccurrences(of: "[^\\d+]", with: "", options: .regularExpression, range: ((vgVenue?.phone)!).startIndex..<((vgVenue?.phone)!).endIndex) {
+                dialPhoneNum(number)
+            }
+        }
+    }
+    
+    func dialPhoneNum(_ number: String) {
+        if let call = venue?.contact.phone, let url = URL(string: "tel://\(call)"),
+            app.canOpenURL(url) {
+            app.open(url)
         }
     }
     
@@ -234,8 +251,12 @@ class DetailTableViewController: UITableViewController {
         
         //get time
         let time = Time()
+        var openMilitary: String!
+        var closeMilitary: String!
         for hours in (venueDetails?.hours)! {
             for openHours in hours.open {
+                openMilitary = openHours.start
+                closeMilitary = openHours.end
                 if let day = time.getDayOfWeek() {
                     if openHours.day == day - 1 {
                         let open = time.convertToReadableTime(openHours.start)
@@ -244,6 +265,19 @@ class DetailTableViewController: UITableViewController {
                     }
                 }
             }
+        }
+        //isRestaurantOpen
+        let today = Date()
+        let openHour = Int(String(openMilitary.characters.prefix(2)))
+        let openMin = Int(String(openMilitary.characters.suffix(2)))
+        let closeHour = Int(String(closeMilitary.characters.prefix(2)))
+        let closeMin = Int(String(closeMilitary.characters.suffix(2)))
+        let openTime = today.compareTimes(hours: openHour!, minutes: openMin!)
+        let closeTime = today.compareTimes(hours: closeHour!, minutes: closeMin!)
+        if today <= openTime && today >= closeTime {
+            isOpenView.detailIsOpen(false)
+        } else {
+            isOpenView.detailIsOpen(true)
         }
     }
     
@@ -307,40 +341,42 @@ class DetailTableViewController: UITableViewController {
         //if yelp hours aren't available
         var range = [0,1,2,3,4,5,6]
         let day = Time().getDayOfWeek()
-        for hour in (vgVenue?.hours)!  {
-            let restaurantDay = hour.days
-            //apply correct combination to range
-            switch restaurantDay {
-            case "Mon - Fri":
-                range = Array(1...5)
-                break
-            case "Mon - Wed":
-                range = Array(1...3)
-                break
-            case "Mon - Thu":
-                range = Array(1...4)
-                break
-            case "Tue - Thu":
-                range = Array(2...4)
-                break
-            case "Fri - Sat":
-                range = Array(5...6)
-                break
-            case "Sat - Sun":
-                range = [6,0]
-                break
-            case "Fri - Sun":
-                range = [5,6,0]
-                break
-            case "Thur - Fri":
-                range = Array(4...5)
-            default:
-//                print(restaurantDay)
-                break
-            }
-            if range.contains(day!) {
-                for hr in hour.hours {
-                    hoursView.text = hr
+        if let hours = vgVenue?.hours {
+            for hour in hours  {
+                let restaurantDay = hour.days
+                //apply correct combination to range
+                switch restaurantDay {
+                case "Mon - Fri":
+                    range = Array(1...5)
+                    break
+                case "Mon - Wed":
+                    range = Array(1...3)
+                    break
+                case "Mon - Thu":
+                    range = Array(1...4)
+                    break
+                case "Tue - Thu":
+                    range = Array(2...4)
+                    break
+                case "Fri - Sat":
+                    range = Array(5...6)
+                    break
+                case "Sat - Sun":
+                    range = [6,0]
+                    break
+                case "Fri - Sun":
+                    range = [5,6,0]
+                    break
+                case "Thur - Fri":
+                    range = Array(4...5)
+                default:
+                    //                print(restaurantDay)
+                    break
+                }
+                if range.contains(day!) {
+                    for hr in hour.hours {
+                        hoursView.text = hr
+                    }
                 }
             }
         }
