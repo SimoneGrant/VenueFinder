@@ -17,6 +17,7 @@ class DetailTableViewController: UITableViewController {
     var reviews = [Review]()
     var yelpID = String()
     var venueCategory = ""
+    let app = UIApplication.shared
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,7 +30,6 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var descriptionView: UITextView!
-//    @IBOutlet weak var websiteView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var reviewOne: UILabel!
     @IBOutlet weak var reviewTwo: UILabel!
@@ -48,12 +48,13 @@ class DetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+        app.statusBarStyle = .lightContent
     }
     
     // MARK: - Setup, Navigation, and Scrolling
    
     func setupNavigationAndLabels() {
+        //fix status bar inset
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
@@ -68,10 +69,12 @@ class DetailTableViewController: UITableViewController {
         
         if venue != nil {
             setupFSLabels()
+            getYelpID()
         } else {
             setupVGLabels()
+            getYelpID()
         }
-        getYelpID()
+    
     }
     
     ///////IMPLEMENT NSUSERDEFAULTS///////
@@ -86,12 +89,12 @@ class DetailTableViewController: UITableViewController {
         nav?.isTranslucent = false
         nav?.barTintColor = UIColor.white
         nav?.tintColor = UIColor.black
-        UIApplication.shared.statusBarStyle = .default
+        app.statusBarStyle = .default
         if tableView.contentOffset.y <= 80 {
             nav?.alpha = 1
             nav?.isTranslucent = true
             nav?.tintColor = UIColor.white
-            UIApplication.shared.statusBarStyle = .lightContent
+            app.statusBarStyle = .lightContent
         }
     }
     
@@ -147,6 +150,26 @@ class DetailTableViewController: UITableViewController {
     
     // MARK: Setup Views
     
+    //Visit URL
+    @IBAction func visitWebsiteSelected(_ sender: UIButton) {
+        if venue != nil {
+            if let url = venue?.url {
+                goToURL(url)
+            }
+        } else {
+            if let website = vgVenue?.website {
+                goToURL(website)
+            }
+        }
+    }
+    
+    func goToURL(_ url: String) {
+        if let destinationURL = URL(string: url) {
+            app.open(destinationURL as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    //Load labels
     func setupFSLabels() {
         for item in (venue?.photos?.groups)! {
             for photo in item.items {
@@ -168,7 +191,6 @@ class DetailTableViewController: UITableViewController {
         addressLabel.text = "\(street), \(city), \(state), \(zip)"
         phoneNumLabel.text = venue?.contact.formattedPhone
         phoneNumLabel.sizeToFit()
-//        websiteView.text = venue?.url?.lowercased()
     }
     
     func setupYelpLabelsForFS() {
@@ -189,7 +211,7 @@ class DetailTableViewController: UITableViewController {
         if tagArr.count == 1 {
             tagString = tagArr[0]
         }
-        if tagArr.count == 2 {
+        if tagArr.count >= 2 {
             tagArr.insert("and ", at: tagArr.count - 1)
         }
         if tagArr.count >= 3 {
@@ -281,7 +303,6 @@ class DetailTableViewController: UITableViewController {
             priceRangeLabel.text = priceRange.components(separatedBy: " ")[0]
         }
         descriptionTextView.text = vgVenue?.long_description?.wikitext
-//        websiteView.text = vgVenue?.website?.lowercased()
         
         //if yelp hours aren't available
         var range = [0,1,2,3,4,5,6]

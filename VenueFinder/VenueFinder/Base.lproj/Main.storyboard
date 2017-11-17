@@ -602,19 +602,23 @@
                                                         <constraint firstAttribute="height" constant="20" id="oOi-bf-PFK"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6C-yg-Cq6">
-                                                    <rect key="frame" x="46" y="5.5" width="87" height="20.5"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BoH-We-rn0">
+                                                    <rect key="frame" x="46" y="-1.5" width="87" height="33"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <state key="normal" title="Visit Website">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="visitWebsiteSelected:" destination="Rr4-Yp-vsi" eventType="touchUpInside" id="GBi-Vd-Dsb"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ay7-u5-mgJ" firstAttribute="leading" secondItem="yrl-vW-JzM" secondAttribute="leadingMargin" constant="3" id="8wK-5O-WSH"/>
+                                                <constraint firstItem="BoH-We-rn0" firstAttribute="leading" secondItem="ay7-u5-mgJ" secondAttribute="trailing" constant="15" id="9u5-aD-wqK"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BoH-We-rn0" secondAttribute="trailing" constant="20" symbolic="YES" id="DZr-5h-jGO"/>
                                                 <constraint firstItem="ay7-u5-mgJ" firstAttribute="centerY" secondItem="yrl-vW-JzM" secondAttribute="centerY" id="Pde-C7-mjM"/>
-                                                <constraint firstItem="m6C-yg-Cq6" firstAttribute="leading" secondItem="ay7-u5-mgJ" secondAttribute="trailing" constant="15" id="TwW-ua-Qjr"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="m6C-yg-Cq6" secondAttribute="trailing" constant="20" symbolic="YES" id="eW9-j9-5d1"/>
-                                                <constraint firstItem="m6C-yg-Cq6" firstAttribute="centerY" secondItem="yrl-vW-JzM" secondAttribute="centerY" id="lYr-ZV-8Zb"/>
+                                                <constraint firstItem="BoH-We-rn0" firstAttribute="centerY" secondItem="yrl-vW-JzM" secondAttribute="centerY" id="tXv-Mq-xKo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -839,9 +843,7 @@
                             <outlet property="delegate" destination="Rr4-Yp-vsi" id="8r0-4r-ncc"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="rHh-v6-hYB"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addressLabel" destination="pCH-Ib-v9x" id="Wkc-KO-JJr"/>
