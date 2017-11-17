@@ -18,6 +18,8 @@ class DetailTableViewController: UITableViewController {
     var yelpID = String()
     var venueCategory = ""
     let app = UIApplication.shared
+    var currentLocation = CLLocation(latitude: 40.7, longitude: -74)
+    let geocoder = CLGeocoder()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -75,6 +77,8 @@ class DetailTableViewController: UITableViewController {
             getYelpID()
         }
     
+        setupMap()
+        addViewOnMap()
     }
     
     ///////IMPLEMENT NSUSERDEFAULTS///////
@@ -85,7 +89,7 @@ class DetailTableViewController: UITableViewController {
     //change navigation transparency
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let nav = navigationController?.navigationBar
-        nav?.alpha = 0.3 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
+        nav?.alpha = 0.6 + (self.tableView.contentOffset.y / (self.tableView.contentSize.height - self.tableView.frame.size.height))
         nav?.isTranslucent = false
         nav?.barTintColor = UIColor.white
         nav?.tintColor = UIColor.black
@@ -120,6 +124,7 @@ class DetailTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 for data in business.businesses {
                     self.yelpID = data.id
+//                    print("yelpID", self.yelpID)
                     self.getBusinessData(self.yelpID)
                 }
             }

@@ -36,7 +36,8 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
-        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.alpha = 1
+        navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
     // MARK: - Setup UI & Networking
@@ -44,8 +45,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     func setupUI() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 130.0
-        //        let mapButton = UIBarButtonItem(image: #imageLiteral(resourceName: "map"), style: .done, target: self, action: #selector(openMapView))
-        //        let filterButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .done, target: self, action: #selector(openMapView))
     }
     
     //remove duplicate entries in the vegguide and foursquare results

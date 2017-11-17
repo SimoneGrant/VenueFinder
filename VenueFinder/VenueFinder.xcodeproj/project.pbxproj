@@ -31,6 +31,7 @@
 		189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */; };
 		189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */; };
 		189A30331FB7FA440096C2A8 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */; };
+		18B189F01FBF848800DCEC7E /* DetailTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkString.swift; sourceTree = "<group>"; };
 		189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
+		18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				189A302B1FB6488C0096C2A8 /* MapViewController.swift */,
 				189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */,
 				189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */,
+				18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -135,11 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				1883AD3C1FB643C300224C15 /* CountryCodes.swift */,
+				182DCC0E1FBD68620098FBD5 /* GetCountry.swift */,
 				1883AD381FB6435600224C15 /* Auth.swift */,
 				1883AD341FB6428100224C15 /* APIKeys.swift */,
 				1883AD3A1FB6439400224C15 /* ImageViewExt.swift */,
 				182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */,
-				182DCC0E1FBD68620098FBD5 /* GetCountry.swift */,
 				1864BD7B1FBF4E6600DC01DD /* DateExt.swift */,
 			);
 			path = Helpers;
@@ -223,6 +226,7 @@
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
 				189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */,
 				182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */,
+				18B189F01FBF848800DCEC7E /* DetailTableViewExtension.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
 				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
 				1864BD7C1FBF4E6600DC01DD /* DateExt.swift in Sources */,
