@@ -9,7 +9,11 @@
 import UIKit
 import CoreLocation
 
-class ListTableViewController: UITableViewController, CLLocationManagerDelegate {
+protocol Favorites {
+    func isItFavorited(value: Bool)
+}
+
+class ListTableViewController: UITableViewController, CLLocationManagerDelegate, Favorites {
 
     var restaurantsFS = [Venue]()
     var restaurantsVG = [Entries]()
@@ -21,6 +25,13 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         locMan.distanceFilter = 50.0
         return locMan
     }()
+    //user defaults
+    var gotFavorited: Bool!
+    var cellNum: Int!
+    let userDefault = UserDefaults.standard
+    var defaultKey = "favorited"
+    var indexKey = "cell"
+    var favorites = [Int:Bool]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +49,28 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         UIApplication.shared.statusBarStyle = .default
         navigationController?.navigationBar.alpha = 1
         navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        //user defaults
+        //check for changes
+        print("I am the detail key: \(userDefault.bool(forKey: "detail"))")
+        gotFavorited = userDefault.bool(forKey: "detail")
+        saveDefaults()
+        //update the tableview
+        self.tableView.reloadData()
+        print(favorites)
+
+    }
+    
+    // MARK: - User Defaults
+    
+    func saveDefaults() {
+        userDefault.set(cellNum, forKey: indexKey)
+        userDefault.set(gotFavorited, forKey: defaultKey)
+        favorites[userDefault.integer(forKey: indexKey)] = userDefault.bool(forKey: defaultKey)
+    }
+    
+    func isItFavorited(value: Bool) {
+        self.gotFavorited = value
     }
 
     // MARK: - Setup UI & Networking
@@ -151,6 +184,13 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             //mileage
             let restaurantLoc = CLLocation(latitude: CLLocationDegrees(venue.location.lat), longitude: CLLocationDegrees(venue.location.lng))
             cell.mileageLabel.text = calculateMileage(location: restaurantLoc, destination: currentLocation)
+            //user default
+            let favorite = favorites[indexPath.row]
+            if favorite == true {
+                cell.savedFavorite.image = UIImage(named: "small_red")
+            } else {
+                cell.savedFavorite.image = nil
+            }
             return cell
             
         default:
@@ -173,8 +213,21 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                     cell.mileageLabel.text = self.calculateMileage(location: self.currentLocation, destination: location)
                 }
             }
+            //user default
+            let favorite = favorites[indexPath.row]
+            if favorite == true {
+                cell.savedFavorite.image = UIImage(named: "small_red")
+            } else {
+                cell.savedFavorite.image = nil
+            }
+
             return cell
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        //identify the row selected
+        cellNum = indexPath.row
     }
     
     // MARK: - Navigation
@@ -190,12 +243,24 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                 let cellPath = self.tableView.indexPath(for: selectedCell)
                 let stats = restaurantsFS[(cellPath?.row)!]
                 details.venue = stats
+                if favorites[(cellPath?.row)!] == true {
+                details.isFavorited = true
+                } else {
+                    details.isFavorited = false
+                }
             } else if segue.identifier == "vgDetail" {
                 let details = segue.destination as! DetailTableViewController
                 let cellPath = self.tableView.indexPath(for: selectedCell)
                 let stats = restaurantsVG[(cellPath?.row)!]
                 details.vgVenue = stats
+                if favorites[(cellPath?.row)!] == true {
+                    details.isFavorited = true
+                } else {
+                    details.isFavorited = false
+                }
             }
+
+
         }
     }
 }

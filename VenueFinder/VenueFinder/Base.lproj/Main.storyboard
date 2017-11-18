@@ -23,7 +23,7 @@
             <objects>
                 <tableViewController id="g6k-tk-y47" customClass="ListTableViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="10" sectionFooterHeight="5" id="EWm-Au-onW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -81,6 +81,13 @@
                                                 <constraint firstAttribute="width" constant="20" id="ehZ-E1-enR"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GzN-mH-bqj">
+                                            <rect key="frame" x="14" y="8" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Ka8-Bq-xg3"/>
+                                                <constraint firstAttribute="width" constant="20" id="Nax-E6-2Oe"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="hRh-6s-y8F" firstAttribute="leading" secondItem="1e8-1K-Pke" secondAttribute="leading" id="1QA-V4-SoL"/>
@@ -101,12 +108,14 @@
                                         <constraint firstItem="1e8-1K-Pke" firstAttribute="top" secondItem="q7w-ia-JCT" secondAttribute="bottom" id="VR5-Ma-yF7"/>
                                         <constraint firstItem="1e8-1K-Pke" firstAttribute="leading" secondItem="q7w-ia-JCT" secondAttribute="leading" id="Xcw-KD-Vvo"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1e8-1K-Pke" secondAttribute="trailing" constant="20" symbolic="YES" id="ZI0-TC-Av9"/>
+                                        <constraint firstItem="GzN-mH-bqj" firstAttribute="leading" secondItem="IK0-82-JP9" secondAttribute="leading" constant="14" id="a2D-NE-wCd"/>
                                         <constraint firstItem="n5z-D4-8fm" firstAttribute="top" secondItem="IK0-82-JP9" secondAttribute="topMargin" constant="5" id="dWi-yW-Luq"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jMD-3y-nAV" secondAttribute="trailing" constant="200" id="j2i-D2-BXW"/>
                                         <constraint firstItem="jMD-3y-nAV" firstAttribute="leading" secondItem="hRh-6s-y8F" secondAttribute="leading" id="lFn-af-ACV"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="jMD-3y-nAV" secondAttribute="bottom" constant="10" id="njF-cH-sZm"/>
                                         <constraint firstItem="hUL-dt-g39" firstAttribute="trailing" secondItem="YhO-WO-Ec7" secondAttribute="trailing" id="oPs-bH-ifY"/>
                                         <constraint firstItem="jMD-3y-nAV" firstAttribute="leading" secondItem="q7w-ia-JCT" secondAttribute="leading" id="pPa-7s-Bo9"/>
+                                        <constraint firstItem="GzN-mH-bqj" firstAttribute="top" secondItem="IK0-82-JP9" secondAttribute="top" constant="8" id="v9m-Pq-Pag"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -117,6 +126,7 @@
                                     <outlet property="ratingsView" destination="jMD-3y-nAV" id="0Un-pM-loW"/>
                                     <outlet property="restaurantNameLabel" destination="q7w-ia-JCT" id="ilj-TD-Z3N"/>
                                     <outlet property="restaurantTypeLabel" destination="1e8-1K-Pke" id="2tu-gT-lvi"/>
+                                    <outlet property="savedFavorite" destination="GzN-mH-bqj" id="Jdm-61-QgT"/>
                                     <outlet property="venueImage" destination="n5z-D4-8fm" id="IKk-2o-xa4"/>
                                     <segue destination="Rr4-Yp-vsi" kind="show" identifier="fsDetail" id="DyH-yJ-2no"/>
                                 </connections>
@@ -176,6 +186,13 @@
                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AVM-Ba-ZJ6">
+                                            <rect key="frame" x="14" y="8" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="UDC-mE-Pqc"/>
+                                                <constraint firstAttribute="width" constant="20" id="bFK-gS-0tH"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="tiJ-TP-fa4" firstAttribute="top" secondItem="gSR-m4-RK3" secondAttribute="bottom" id="0AI-kH-HCq"/>
@@ -184,6 +201,7 @@
                                         <constraint firstItem="6Um-Ic-iHz" firstAttribute="leading" secondItem="ynp-W4-7eL" secondAttribute="leading" id="BZ5-qJ-oyZ"/>
                                         <constraint firstItem="ynp-W4-7eL" firstAttribute="leading" secondItem="nyE-y8-q0M" secondAttribute="trailing" constant="10" id="CUI-Jc-zJg"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tiJ-TP-fa4" secondAttribute="trailing" constant="20" symbolic="YES" id="Hdj-8B-OWE"/>
+                                        <constraint firstItem="AVM-Ba-ZJ6" firstAttribute="leading" secondItem="fhQ-1E-aN1" secondAttribute="leading" constant="14" id="KfQ-Hr-5Nw"/>
                                         <constraint firstItem="XjD-SH-XAv" firstAttribute="top" secondItem="ffz-Rq-MBq" secondAttribute="bottom" constant="1" id="QfQ-Hj-dYG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="7aD-Dc-XdP" secondAttribute="trailing" constant="10" id="Qo5-Rr-IXb"/>
                                         <constraint firstItem="nyE-y8-q0M" firstAttribute="leading" secondItem="fhQ-1E-aN1" secondAttribute="leadingMargin" id="SQW-EZ-yM2"/>
@@ -193,6 +211,7 @@
                                         <constraint firstItem="6Um-Ic-iHz" firstAttribute="top" secondItem="tiJ-TP-fa4" secondAttribute="bottom" constant="1" id="ZuI-f1-jW9"/>
                                         <constraint firstItem="tiJ-TP-fa4" firstAttribute="leading" secondItem="nyE-y8-q0M" secondAttribute="trailing" constant="10" id="cXU-nr-7K7"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="nyE-y8-q0M" secondAttribute="bottom" constant="12" id="fmF-7u-NZD"/>
+                                        <constraint firstItem="AVM-Ba-ZJ6" firstAttribute="top" secondItem="fhQ-1E-aN1" secondAttribute="top" constant="8" id="g9g-gD-TBI"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ffz-Rq-MBq" secondAttribute="trailing" constant="10" id="mIk-KG-0Dd"/>
                                         <constraint firstItem="ffz-Rq-MBq" firstAttribute="top" secondItem="7aD-Dc-XdP" secondAttribute="bottom" constant="1" id="oy8-Rg-eEQ"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="6Um-Ic-iHz" secondAttribute="bottom" constant="10" id="p8b-yI-X6X"/>
@@ -211,6 +230,7 @@
                                     <outlet property="ratingsView" destination="6Um-Ic-iHz" id="gjJ-uE-Eol"/>
                                     <outlet property="restaurantNameLabel" destination="ynp-W4-7eL" id="D5R-Tm-xF4"/>
                                     <outlet property="restaurantTypeLabel" destination="gSR-m4-RK3" id="HbS-Wi-cVc"/>
+                                    <outlet property="savedFavorite" destination="AVM-Ba-ZJ6" id="csP-Uo-Nqa"/>
                                     <outlet property="venueImage" destination="nyE-y8-q0M" id="K2q-uW-0JZ"/>
                                     <segue destination="Rr4-Yp-vsi" kind="show" identifier="vgDetail" id="p5J-g9-Zgc"/>
                                 </connections>
@@ -394,7 +414,7 @@
             <objects>
                 <tableViewController id="Rr4-Yp-vsi" customClass="DetailTableViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="fPR-Jc-hNV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="1Hu-3N-HNK">
@@ -896,7 +916,7 @@
             <objects>
                 <viewController id="dkx-y5-xIk" customClass="MapViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ngd-Y3-QIT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SR1-4K-5Lg">
@@ -926,7 +946,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cgC-YW-Jfb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="vk7-6B-ds9">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
@@ -945,7 +964,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wQe-pj-afO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rVz-0g-KRf">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>

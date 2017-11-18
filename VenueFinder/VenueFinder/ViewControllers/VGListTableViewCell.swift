@@ -19,6 +19,7 @@ class VGListTableViewCell: UITableViewCell {
     @IBOutlet weak var isOpenView: UIImageView!
     @IBOutlet weak var restaurantTypeLabel: UILabel!
     @IBOutlet weak var ratingsView: UIImageView!
+    @IBOutlet weak var savedFavorite: UIImageView!
     
     
     var entry: Entries? {

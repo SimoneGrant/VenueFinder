@@ -19,6 +19,7 @@ class FSListTableViewCell: UITableViewCell {
     @IBOutlet weak var isOpenView: UIImageView!
     @IBOutlet weak var restaurantTypeLabel: UILabel!
     @IBOutlet weak var ratingsView: UIImageView!
+    @IBOutlet weak var savedFavorite: UIImageView!
     
     var venue: Venue? {
         didSet {

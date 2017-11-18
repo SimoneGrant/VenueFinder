@@ -20,6 +20,11 @@ class DetailTableViewController: UITableViewController {
     let app = UIApplication.shared
     var currentLocation = CLLocation(latitude: 40.7, longitude: -74)
     let geocoder = CLGeocoder()
+    //userDefault
+    var pageDelegate: Favorites?
+    var isFavorited: Bool!
+    let userDefault = UserDefaults.standard
+    var detailKey = "detail"
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -46,11 +51,19 @@ class DetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationAndLabels()
+        userDefault.set(isFavorited, forKey: detailKey)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         app.statusBarStyle = .lightContent
+        //use this to read boolean value from protocol delegate
+        pageDelegate?.isItFavorited(value: isFavorited)
+        
+        //trying to get previously true cells to remain true
+        if userDefault.bool(forKey: detailKey) == true {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.red
+        }
     }
     
     // MARK: - Setup, Navigation, and Scrolling
@@ -68,22 +81,15 @@ class DetailTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blackHeart"), style: .plain, target: self, action: #selector(selectFavorite))
-        
+     
         if venue != nil {
             setupFSLabels()
-            getYelpID()
         } else {
             setupVGLabels()
-            getYelpID()
         }
-    
+        getYelpID()
         setupMap()
         addViewOnMap()
-    }
-    
-    ///////IMPLEMENT NSUSERDEFAULTS///////
-    @objc func selectFavorite() {
-        print("selected")
     }
     
     //change navigation transparency
@@ -102,6 +108,21 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - User Defaults
+    
+    @objc func selectFavorite() {
+        if isFavorited == false {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.red
+            isFavorited = true
+            pageDelegate?.isItFavorited(value: isFavorited)
+        } else {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+            isFavorited = false
+            pageDelegate?.isItFavorited(value: isFavorited)
+        }
+        userDefault.set(isFavorited, forKey: detailKey)
+    }
+
     // MARK: - Call API's
     
     func getYelpID() {

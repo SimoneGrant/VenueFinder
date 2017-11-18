@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+// TODO: - Fix the zoom level on the map view so both annotations show
+
 extension DetailTableViewController: MKMapViewDelegate {
     func setupMap() {
         mapView.delegate = self
@@ -120,6 +122,7 @@ extension DetailTableViewController: MKMapViewDelegate {
                         
                         let rect = route.polyline.boundingMapRect
                         self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+
                     }
 
                 }
@@ -130,8 +133,9 @@ extension DetailTableViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.red
+        renderer.strokeColor = UIColor.gray
         renderer.lineWidth = 3.0
         return renderer
     }
+
 }
