@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1811D5461FCCA27A00DB280D /* ListTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */; };
 		182DCC0D1FBD646F0098FBD5 /* TimeCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */; };
 		182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0E1FBD68620098FBD5 /* GetCountry.swift */; };
 		1864BD7C1FBF4E6600DC01DD /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1864BD7B1FBF4E6600DC01DD /* DateExt.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewExtension.swift; sourceTree = "<group>"; };
 		182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculation.swift; sourceTree = "<group>"; };
 		182DCC0E1FBD68620098FBD5 /* GetCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCountry.swift; sourceTree = "<group>"; };
 		1864BD7B1FBF4E6600DC01DD /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				189A30251FB648020096C2A8 /* ListTableViewController.swift */,
+				1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */,
 				189A30271FB648220096C2A8 /* VGListTableViewCell.swift */,
 				189A30291FB648510096C2A8 /* FSListTableViewCell.swift */,
 				189A302B1FB6488C0096C2A8 /* MapViewController.swift */,
@@ -226,6 +229,7 @@
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
 				189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */,
 				182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */,
+				1811D5461FCCA27A00DB280D /* ListTableViewExtension.swift in Sources */,
 				18B189F01FBF848800DCEC7E /* DetailTableViewExtension.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
 				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
