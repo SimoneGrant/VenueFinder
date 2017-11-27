@@ -33,7 +33,7 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var priceRangeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var hoursView: UILabel!
-//    @IBOutlet weak var distanceLabel: UILabel!
+    //    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var descriptionView: UITextView!
@@ -67,7 +67,7 @@ class DetailTableViewController: UITableViewController {
     }
     
     // MARK: - Setup, Navigation, and Scrolling
-   
+    
     func setupNavigationAndLabels() {
         //fix status bar inset
         if #available(iOS 11.0, *) {
@@ -81,13 +81,16 @@ class DetailTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blackHeart"), style: .plain, target: self, action: #selector(selectFavorite))
-     
+        
         if venue != nil {
             setupFSLabels()
+            setupYelpLabelsForFS()
         } else {
             setupVGLabels()
+            setupYelpLabelsForVG()
         }
-        getYelpID()
+        
+        printYelpReviews()
         setupMap()
         addViewOnMap()
     }
@@ -110,6 +113,8 @@ class DetailTableViewController: UITableViewController {
     
     // MARK: - User Defaults
     
+    // FIXME: - FIX TOOLBAR BUTTON COLOR ON DESELECTION
+    
     @objc func selectFavorite() {
         if isFavorited == false {
             navigationItem.rightBarButtonItem?.tintColor = UIColor.red
@@ -121,54 +126,6 @@ class DetailTableViewController: UITableViewController {
             pageDelegate?.isItFavorited(value: isFavorited)
         }
         userDefault.set(isFavorited, forKey: detailKey)
-    }
-
-    // MARK: - Call API's
-    
-    func getYelpID() {
-        var phoneNumber = String()
-        var country = String()
-        if venue != nil {
-             country = GetCountry.getCountryCode((venue?.location.country)!)
-            if let phoneNum = venue?.contact.phone {
-                phoneNumber = phoneNum
-            }
-        } else {
-            country = GetCountry.getCountryCode((vgVenue?.country)!)
-            //regex for non-digits
-            if let phoneNum = vgVenue?.phone?.replacingOccurrences(of: "[^\\d+]", with: "", options: .regularExpression, range: ((vgVenue?.phone)!).startIndex..<((vgVenue?.phone)!).endIndex) {
-                phoneNumber = phoneNum
-            }
-        }
-        let url = NetworkString().yelpSearchBy(phone: phoneNumber, country: country)
-        APIRequestManager.sharedManager.fetchYelpDetails(endPoint: url, { (business) in
-            DispatchQueue.main.async {
-                for data in business.businesses {
-                    self.yelpID = data.id
-//                    print("yelpID", self.yelpID)
-                    self.getBusinessData(self.yelpID)
-                }
-            }
-        })
-    }
-    
-    func getBusinessData(_ venueID: String) {
-        let url = NetworkString().searchBy(venueID: venueID)
-        APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
-                self.venueDetails = business
-                //call here while venue details is accessible
-                self.setupYelpLabelsForFS()
-                self.setupYelpLabelsForVG()
-                self.getReviewData(self.yelpID)
-        }
-    }
-    
-    func getReviewData(_ venueID: String) {
-        let url = NetworkString().yelpSearchReviewsByVenue(ID: venueID)
-        APIRequestManager.sharedManager.fetchYelpReviews(endPoint: url) { (reviews) in
-            self.reviews = reviews.reviews
-            self.printYelpReviews()
-        }
     }
     
     // MARK: Setup Views and Functionality

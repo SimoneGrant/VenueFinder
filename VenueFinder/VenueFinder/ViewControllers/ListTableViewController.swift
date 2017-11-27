@@ -14,7 +14,7 @@ protocol Favorites {
 }
 
 class ListTableViewController: UITableViewController, CLLocationManagerDelegate, Favorites {
-
+    
     var restaurantsFS = [Venue]()
     var restaurantsVG = [Entries]()
     var currentLocation = CLLocation(latitude: 40.7, longitude: -74)
@@ -32,14 +32,19 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
     var defaultKey = "favorited"
     var indexKey = "cell"
     var favorites = [Int:Bool]()
-
+    //yelp stuff
+    var venueDetails: VenueDetails?
+    var reviews = [Review]()
+    var yelpID = String()
+    var venueCategory = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocationUpdate()
         fourSqData()
         vegGuideData()
         setupUI()
-
+        
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "H A N G R Y"
     }
@@ -49,6 +54,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         UIApplication.shared.statusBarStyle = .default
         navigationController?.navigationBar.alpha = 1
         navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.isTranslucent = false
         
         //user defaults
         //check for changes
@@ -58,7 +64,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         //update the tableview
         self.tableView.reloadData()
         print(favorites)
-
+        
     }
     
     // MARK: - User Defaults
@@ -72,7 +78,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
     func isItFavorited(value: Bool) {
         self.gotFavorited = value
     }
-
+    
     // MARK: - Setup UI & Networking
     
     func setupUI() {
@@ -83,11 +89,11 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
     //remove duplicate entries in the vegguide and foursquare results
     func filterData() {
         if !restaurantsFS.isEmpty && !restaurantsVG.isEmpty {
-            for (index, info) in restaurantsFS.enumerated() {
+            for (_, info) in restaurantsFS.enumerated() {
                 for (num, veg) in restaurantsVG.enumerated() {
                     if info.location.address.components(separatedBy: " ")[0] == veg.address1.components(separatedBy: " ")[0] {
-                     if info.location.address.components(separatedBy: " ")[1] == veg.address1.components(separatedBy: " ")[1] {
-//                        print("Foursqare: \(info.name), \(index)", "VegGuide: \(veg.name), \(num)")
+                        if info.location.address.components(separatedBy: " ")[1] == veg.address1.components(separatedBy: " ")[1] {
+                            //                        print("Foursqare: \(info.name), \(index)", "VegGuide: \(veg.name), \(num)")
                             restaurantsVG.remove(at: num)
                             tableView.reloadData()
                         }
@@ -128,6 +134,37 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         }
     }
     
+    // Yelp
+    func getYelpID(_ place: String, number: String) {
+        let url = NetworkString().yelpSearchBy(phone: number, country: place)
+        APIRequestManager.sharedManager.fetchYelpDetails(endPoint: url, { (business) in
+            DispatchQueue.main.async {
+                for data in business.businesses {
+                    self.yelpID = data.id
+                    //                    print("yelpID", self.yelpID)
+                    self.getBusinessData(self.yelpID)
+                }
+            }
+        })
+    }
+    
+    //TODO: - Change search by phone number to search by ID name
+    
+    func getBusinessData(_ venueID: String) {
+        let url = NetworkString().searchBy(venueID: venueID)
+        APIRequestManager.sharedManager.fetchYelpBusiness(endPoint: url) { (business) in
+            self.venueDetails = business
+            print(self.venueDetails?.name ?? "")
+            self.getReviewData(self.yelpID)
+        }
+    }
+    
+    func getReviewData(_ venueID: String) {
+        let url = NetworkString().yelpSearchReviewsByVenue(ID: venueID)
+        APIRequestManager.sharedManager.fetchYelpReviews(endPoint: url) { (reviews) in
+            self.reviews = reviews.reviews
+        }
+    }
     
     // MARK: - Location Manager
     
@@ -179,6 +216,9 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FSListTableViewCell
             let venue = restaurantsFS[indexPath.row]
+            if let number = venue.contact.phone {
+                getYelpID(GetCountry.getCountryCode(venue.location.country), number: number)
+            }
             let fsCell = cell
             fsCell.venue = venue
             //mileage
@@ -196,6 +236,10 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "vegCell", for: indexPath) as! VGListTableViewCell
             let venuesVG = restaurantsVG[indexPath.row]
+            //regex
+            if let phoneNum = venuesVG.phone?.replacingOccurrences(of: "[^\\d+]", with: "", options: .regularExpression, range: ((venuesVG.phone)!).startIndex..<((venuesVG.phone)!).endIndex) {
+                getYelpID(GetCountry.getCountryCode(venuesVG.country), number: phoneNum)
+            }
             let vegCell = cell
             vegCell.entry = venuesVG
             //distance
@@ -220,7 +264,6 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
             } else {
                 cell.savedFavorite.image = nil
             }
-
             return cell
         }
     }
@@ -228,6 +271,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         //identify the row selected
         cellNum = indexPath.row
+        print("yelpID:", yelpID)
     }
     
     // MARK: - Navigation
@@ -243,8 +287,11 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
                 let cellPath = self.tableView.indexPath(for: selectedCell)
                 let stats = restaurantsFS[(cellPath?.row)!]
                 details.venue = stats
+                details.yelpID = yelpID
+                details.venueDetails = venueDetails
+                details.reviews = reviews
                 if favorites[(cellPath?.row)!] == true {
-                details.isFavorited = true
+                    details.isFavorited = true
                 } else {
                     details.isFavorited = false
                 }
@@ -253,14 +300,15 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
                 let cellPath = self.tableView.indexPath(for: selectedCell)
                 let stats = restaurantsVG[(cellPath?.row)!]
                 details.vgVenue = stats
+                details.yelpID = yelpID
+                details.venueDetails = venueDetails
+                details.reviews = reviews
                 if favorites[(cellPath?.row)!] == true {
                     details.isFavorited = true
                 } else {
                     details.isFavorited = false
                 }
             }
-
-
         }
     }
 }
