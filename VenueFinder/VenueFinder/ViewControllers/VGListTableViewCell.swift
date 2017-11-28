@@ -19,6 +19,7 @@ class VGListTableViewCell: UITableViewCell {
     @IBOutlet weak var isOpenView: UIImageView!
     @IBOutlet weak var restaurantTypeLabel: UILabel!
     @IBOutlet weak var ratingsView: UIImageView!
+    @IBOutlet weak var savedFavorite: UIImageView!
     
     
     var entry: Entries? {
@@ -38,7 +39,7 @@ class VGListTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        restaurantNameLabel.text = entry?.name.uppercased()
+        restaurantNameLabel.text = entry?.name 
         addressLabel.text = entry?.address1
         priceRangeLabel.text = entry?.price_range.components(separatedBy: " ")[0]
         //category
@@ -68,6 +69,8 @@ class VGListTableViewCell: UITableViewCell {
         }
         //isOpen
         isOpenView.image = nil
+        
+        
     }
     
 }

@@ -19,6 +19,7 @@ class FSListTableViewCell: UITableViewCell {
     @IBOutlet weak var isOpenView: UIImageView!
     @IBOutlet weak var restaurantTypeLabel: UILabel!
     @IBOutlet weak var ratingsView: UIImageView!
+    @IBOutlet weak var savedFavorite: UIImageView!
     
     var venue: Venue? {
         didSet {
@@ -37,7 +38,7 @@ class FSListTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        restaurantNameLabel.text = venue?.name.uppercased()
+        restaurantNameLabel.text = venue?.name //.uppercased()
         addressLabel.text = venue?.location.address
         priceRangeLabel.text = venue?.price?.currency
         //category
@@ -60,22 +61,6 @@ class FSListTableViewCell: UITableViewCell {
         if let open = venue?.hours?.isOpen {
             isOpenView.isOpen(open)
         }
-        
-        //isOpen
-        //        if let hours = venuesVG.hours {
-        //            for sched in hours {
-        //                let venueDay = sched.days
-        //                let venueHrs = sched.hours
-        
-        //                if let day = Date().dayOfWeek() {
-        //                    print(day)
-        //                    if venueDay.contains(day) {
-        //                        print(venueDay)
-        //                    }
-        //                }
-        //            }
-        //        }
-        
     }
     
 }

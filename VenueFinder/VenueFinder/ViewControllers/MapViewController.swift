@@ -26,10 +26,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         getData()
         getLocationUpdate()
+//        setupNavBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavBar()
+    }
+    
+    func setupNavBar() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func getData() {
-        let url = "\(Network.FourSquare.baseURL)/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&venuePhotos=1&client_id=\(Auth.init().clientID)&client_secret=\(Auth.init().clientSecret)&v=20181124&query=vegan"
+        let url = NetworkString().fourSquareURLString(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         APIRequestManager.sharedManager.fetchFSData(endPoint: url) { (restaurant) in
             for group in restaurant.response.groups {
                 for items in group.items {

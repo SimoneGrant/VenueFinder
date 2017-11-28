@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1811D5461FCCA27A00DB280D /* ListTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */; };
+		182DCC0D1FBD646F0098FBD5 /* TimeCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */; };
+		182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0E1FBD68620098FBD5 /* GetCountry.swift */; };
+		1864BD7C1FBF4E6600DC01DD /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1864BD7B1FBF4E6600DC01DD /* DateExt.swift */; };
 		1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */; };
 		1883AD2F1FB6413900224C15 /* RestaurantVGModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */; };
 		1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883AD301FB6414F00224C15 /* YelpModel.swift */; };
@@ -26,9 +30,16 @@
 		189A302A1FB648510096C2A8 /* FSListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30291FB648510096C2A8 /* FSListTableViewCell.swift */; };
 		189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302B1FB6488C0096C2A8 /* MapViewController.swift */; };
 		189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */; };
+		189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */; };
+		189A30331FB7FA440096C2A8 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */; };
+		18B189F01FBF848800DCEC7E /* DetailTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewExtension.swift; sourceTree = "<group>"; };
+		182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculation.swift; sourceTree = "<group>"; };
+		182DCC0E1FBD68620098FBD5 /* GetCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCountry.swift; sourceTree = "<group>"; };
+		1864BD7B1FBF4E6600DC01DD /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFSModel.swift; sourceTree = "<group>"; };
 		1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVGModel.swift; sourceTree = "<group>"; };
 		1883AD301FB6414F00224C15 /* YelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpModel.swift; sourceTree = "<group>"; };
@@ -50,6 +61,9 @@
 		189A30291FB648510096C2A8 /* FSListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSListTableViewCell.swift; sourceTree = "<group>"; };
 		189A302B1FB6488C0096C2A8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkString.swift; sourceTree = "<group>"; };
+		189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
+		18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +100,8 @@
 				189A302F1FB7954E0096C2A8 /* Helpers */,
 				1887BADC1FB63FD100E34FD0 /* Model */,
 				189A30241FB6462F0096C2A8 /* ViewControllers */,
-				1887BACC1FB63F8200E34FD0 /* Main.storyboard */,
 				1887BAC81FB63F8200E34FD0 /* AppDelegate.swift */,
+				1887BACC1FB63F8200E34FD0 /* Main.storyboard */,
 				1887BACF1FB63F8200E34FD0 /* Assets.xcassets */,
 				1887BAD11FB63F8200E34FD0 /* LaunchScreen.storyboard */,
 				1887BAD41FB63F8200E34FD0 /* Info.plist */,
@@ -99,11 +113,11 @@
 			isa = PBXGroup;
 			children = (
 				1887BADA1FB63FC400E34FD0 /* APIRequestManager.swift */,
+				189A30301FB7D0CB0096C2A8 /* CustomNetworkString.swift */,
 				1883AD2C1FB6411E00224C15 /* RestaurantFSModel.swift */,
 				1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */,
 				1883AD301FB6414F00224C15 /* YelpModel.swift */,
 				1883AD361FB642E500224C15 /* RestaurantAnnotation.swift */,
-				1883AD3A1FB6439400224C15 /* ImageViewExt.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,10 +126,13 @@
 			isa = PBXGroup;
 			children = (
 				189A30251FB648020096C2A8 /* ListTableViewController.swift */,
+				1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */,
 				189A30271FB648220096C2A8 /* VGListTableViewCell.swift */,
 				189A30291FB648510096C2A8 /* FSListTableViewCell.swift */,
 				189A302B1FB6488C0096C2A8 /* MapViewController.swift */,
+				189A30321FB7FA440096C2A8 /* FiltersTableViewController.swift */,
 				189A302D1FB648B60096C2A8 /* DetailTableViewController.swift */,
+				18B189EF1FBF848800DCEC7E /* DetailTableViewExtension.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -124,8 +141,12 @@
 			isa = PBXGroup;
 			children = (
 				1883AD3C1FB643C300224C15 /* CountryCodes.swift */,
+				182DCC0E1FBD68620098FBD5 /* GetCountry.swift */,
 				1883AD381FB6435600224C15 /* Auth.swift */,
 				1883AD341FB6428100224C15 /* APIKeys.swift */,
+				1883AD3A1FB6439400224C15 /* ImageViewExt.swift */,
+				182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */,
+				1864BD7B1FBF4E6600DC01DD /* DateExt.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -206,8 +227,13 @@
 				189A30281FB648220096C2A8 /* VGListTableViewCell.swift in Sources */,
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
+				189A30311FB7D0CB0096C2A8 /* CustomNetworkString.swift in Sources */,
+				182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */,
+				1811D5461FCCA27A00DB280D /* ListTableViewExtension.swift in Sources */,
+				18B189F01FBF848800DCEC7E /* DetailTableViewExtension.swift in Sources */,
 				1883AD3D1FB643C300224C15 /* CountryCodes.swift in Sources */,
 				189A302E1FB648B60096C2A8 /* DetailTableViewController.swift in Sources */,
+				1864BD7C1FBF4E6600DC01DD /* DateExt.swift in Sources */,
 				189A30261FB648020096C2A8 /* ListTableViewController.swift in Sources */,
 				1883AD2D1FB6411E00224C15 /* RestaurantFSModel.swift in Sources */,
 				1883AD351FB6428100224C15 /* APIKeys.swift in Sources */,
@@ -218,6 +244,8 @@
 				1883AD3B1FB6439400224C15 /* ImageViewExt.swift in Sources */,
 				189A302C1FB6488C0096C2A8 /* MapViewController.swift in Sources */,
 				1883AD311FB6414F00224C15 /* YelpModel.swift in Sources */,
+				182DCC0D1FBD646F0098FBD5 /* TimeCalculation.swift in Sources */,
+				189A30331FB7FA440096C2A8 /* FiltersTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
