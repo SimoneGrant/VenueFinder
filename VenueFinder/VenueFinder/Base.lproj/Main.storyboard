@@ -18,12 +18,12 @@
         </array>
     </customFonts>
     <scenes>
-        <!--H A N G R Y-->
+        <!--y u m V y-->
         <scene sceneID="GCe-DT-gGY">
             <objects>
                 <tableViewController id="g6k-tk-y47" customClass="ListTableViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="10" sectionFooterHeight="5" id="EWm-Au-onW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -241,7 +241,7 @@
                             <outlet property="delegate" destination="g6k-tk-y47" id="utQ-9j-Qul"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="H A N G R Y" id="7Lr-33-INx">
+                    <navigationItem key="navigationItem" title="y u m V y" id="7Lr-33-INx">
                         <leftBarButtonItems>
                             <barButtonItem id="Ndf-Yf-OpF">
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -295,6 +295,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KCr-uq-9BY">
                                                     <rect key="frame" x="308" y="24.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="lowToHighAction:" destination="uuD-tr-7Tf" eventType="valueChanged" id="8Bs-Ig-8oX"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -321,6 +324,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hCD-lg-eNh">
                                                     <rect key="frame" x="308" y="24.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="highToLowAction:" destination="uuD-tr-7Tf" eventType="valueChanged" id="eoM-Uf-X8N"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -339,14 +345,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGu-1s-rEC">
-                                                    <rect key="frame" x="24" y="29" width="62" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance (Nearest To Me)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGu-1s-rEC">
+                                                    <rect key="frame" x="24" y="29" width="179.5" height="22"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IrB-wx-b06">
                                                     <rect key="frame" x="308" y="24.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="closestRestaurantsFilter:" destination="uuD-tr-7Tf" eventType="valueChanged" id="xen-Wu-yd7"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -377,6 +386,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0xs-ef-dHz">
                                                     <rect key="frame" x="308" y="24.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="isOpen:" destination="uuD-tr-7Tf" eventType="valueChanged" id="l84-et-dua"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -404,17 +416,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="distanceSwitch" destination="IrB-wx-b06" id="DxO-wg-vCR"/>
+                        <outlet property="highToLowSwitch" destination="hCD-lg-eNh" id="j3p-tO-86Q"/>
+                        <outlet property="isOpenSwitch" destination="0xs-ef-dHz" id="8YA-rS-6Rg"/>
+                        <outlet property="lowToHighSwitch" destination="KCr-uq-9BY" id="VDZ-SN-bbx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ex3-LM-PRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1209" y="-694"/>
+            <point key="canvasLocation" x="1208.8" y="-694.00299850074964"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="mbZ-Kl-fwN">
             <objects>
                 <tableViewController id="Rr4-Yp-vsi" customClass="DetailTableViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="fPR-Jc-hNV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="1Hu-3N-HNK">
@@ -916,7 +934,7 @@
             <objects>
                 <viewController id="dkx-y5-xIk" customClass="MapViewController" customModule="VenueFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ngd-Y3-QIT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SR1-4K-5Lg">
@@ -946,6 +964,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cgC-YW-Jfb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="vk7-6B-ds9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
@@ -964,6 +983,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wQe-pj-afO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rVz-0g-KRf">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>

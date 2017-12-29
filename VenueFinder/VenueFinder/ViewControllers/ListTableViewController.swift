@@ -46,7 +46,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate,
         setupUI()
         
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "H A N G R Y"
+        navigationItem.title = "y u m V y"
     }
     
     override func viewWillAppear(_ animated: Bool) {
