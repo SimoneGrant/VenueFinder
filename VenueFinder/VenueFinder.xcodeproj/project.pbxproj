@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1811D5461FCCA27A00DB280D /* ListTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */; };
+		182219B71FFA249500F30F85 /* CostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182219B61FFA249500F30F85 /* CostCategory.swift */; };
 		182DCC0D1FBD646F0098FBD5 /* TimeCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */; };
 		182DCC0F1FBD68620098FBD5 /* GetCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DCC0E1FBD68620098FBD5 /* GetCountry.swift */; };
 		1864BD7C1FBF4E6600DC01DD /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1864BD7B1FBF4E6600DC01DD /* DateExt.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		1811D5451FCCA27A00DB280D /* ListTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewExtension.swift; sourceTree = "<group>"; };
+		182219B61FFA249500F30F85 /* CostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostCategory.swift; sourceTree = "<group>"; };
 		182DCC0C1FBD646F0098FBD5 /* TimeCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculation.swift; sourceTree = "<group>"; };
 		182DCC0E1FBD68620098FBD5 /* GetCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCountry.swift; sourceTree = "<group>"; };
 		1864BD7B1FBF4E6600DC01DD /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				1883AD2E1FB6413900224C15 /* RestaurantVGModel.swift */,
 				1883AD301FB6414F00224C15 /* YelpModel.swift */,
 				1883AD361FB642E500224C15 /* RestaurantAnnotation.swift */,
+				182219B61FFA249500F30F85 /* CostCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182219B71FFA249500F30F85 /* CostCategory.swift in Sources */,
 				189A30281FB648220096C2A8 /* VGListTableViewCell.swift in Sources */,
 				1887BADB1FB63FC400E34FD0 /* APIRequestManager.swift in Sources */,
 				1883AD371FB642E500224C15 /* RestaurantAnnotation.swift in Sources */,
