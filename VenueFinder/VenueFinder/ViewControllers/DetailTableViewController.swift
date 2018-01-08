@@ -251,10 +251,10 @@ class DetailTableViewController: UITableViewController {
         }
         //isRestaurantOpen
         let today = Date()
-        let openHour = Int(String(openMilitary.characters.prefix(2)))
-        let openMin = Int(String(openMilitary.characters.suffix(2)))
-        let closeHour = Int(String(closeMilitary.characters.prefix(2)))
-        let closeMin = Int(String(closeMilitary.characters.suffix(2)))
+        let openHour = Int(String(openMilitary.prefix(2)))
+        let openMin = Int(String(openMilitary.suffix(2)))
+        let closeHour = Int(String(closeMilitary.prefix(2)))
+        let closeMin = Int(String(closeMilitary.suffix(2)))
         let openTime = today.compareTimes(hours: openHour!, minutes: openMin!)
         let closeTime = today.compareTimes(hours: closeHour!, minutes: closeMin!)
         if today <= openTime && today >= closeTime {

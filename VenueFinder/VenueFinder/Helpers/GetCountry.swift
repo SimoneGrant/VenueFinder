@@ -15,13 +15,13 @@ class GetCountry {
         for x in filteredResults {
             code = x.callCode
         }
-        if country.characters.count == 2 {
+        if country.count == 2 {
             let shortResult = Countries.allCountries.filter( {$0.shortAbbreviation == country })
             for x in shortResult {
                 code = x.callCode
             }
         }
-        if country.characters.count == 3 {
+        if country.count == 3 {
             let longerResult = Countries.allCountries.filter( {$0.longAbbreviation == country })
             for x in longerResult {
                 code = x.callCode
