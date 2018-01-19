@@ -15,22 +15,10 @@ class FiltersTableViewController: UITableViewController {
     @IBOutlet weak var distanceSwitch: UISwitch!
     @IBOutlet weak var isOpenSwitch: UISwitch!
     
-    var doneButton: UIButton {
-        var button = UIButton()
-        button = UIButton(type: .custom)
-        button.setImage(#imageLiteral(resourceName: "button_done"), for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(searchButtonSelected(_:)), for: .touchUpInside)
-        return button
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
-    }
-    
-    @objc func searchButtonSelected(_ sender: UIButton) {
-        print("button selected")
+
     }
     
     @IBAction func cancelButtonSelected(_ sender: Any) {
@@ -40,6 +28,9 @@ class FiltersTableViewController: UITableViewController {
     @IBAction func lowToHighAction(_ sender: UISwitch) {
         if sender.isOn {
             print("low to high is on")
+            /*
+             
+             */
         }
     }
     
